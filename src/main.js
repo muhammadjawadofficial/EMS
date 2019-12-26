@@ -4,29 +4,27 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'bootstrap/dist/js/bootstrap.bundle'
-// import 'jwt-decode'
-window.jwtDecode = require('jwt-decode');
+import './toast'
 
-// import VueSession from 'vue-session'
-// Vue.use(VueSession)
+import customConsole from './console'
+window.doconsole = customConsole.log
 
-import VModal from 'vue-js-modal'
-Vue.use(VModal)
-// Vue.use(VModal, { dialog: true })
+import BootstrapVue from 'bootstrap-vue'
+Vue.use(BootstrapVue)
 
 import 'axios'
 window.axios = require('axios');
 
 Vue.config.productionTip = false
 
-import vueSmoothScroll from 'vue2-smooth-scroll'
-Vue.use(vueSmoothScroll)
-
 /* eslint-disable no-new */
 new Vue({
-  el: '#app', 
+  el: '#app',
   router,
-  components: { App },
+  components: {
+    App
+  },
   template: '<App/>'
 })

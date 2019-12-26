@@ -1,6 +1,9 @@
 .DS_Store
 node_modules/
+fazool/
 /dist/
+config/
+scssss/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
