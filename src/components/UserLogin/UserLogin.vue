@@ -9,12 +9,12 @@
             </div>
             <form class="login100-form validate-form" @submit.prevent="signIn">
                 <p class="text-danger">{{error}}</p>
-                <div class="wrap-input100 validate-input m-b-26">
+                <div class="wrap-input100 validate-input mb-3">
                     <span class="label-input100">Email</span>
                     <input class="input100" v-model="loginInformation.email" type="email" placeholder="Enter username" autocomplete="username" required>
                     <span class="focus-input100"></span>
                 </div>
-                <div class="wrap-input100 validate-input m-b-18">
+                <div class="wrap-input100 validate-input mb-2">
                     <span class="label-input100">Password</span>
                     <input class="input100" v-model="loginInformation.password" type="password" placeholder="Enter password" autocomplete="current_password" required>
                     <span class="focus-input100"></span>
@@ -77,7 +77,5 @@ export default {
 </script>
 
 <style scoped>
-@import url('./css/main.css');
-@import url('./css/util.css');
-@import url('./fonts/font-awesome-4.7.0/css/font-awesome.min.css');
+@import url('./UserLogin.css');
 </style>

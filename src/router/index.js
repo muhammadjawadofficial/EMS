@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import login from '@/components/User/UserLogin/UserLogin'
+import login from '@/components/UserLogin/UserLogin'
 import pageProfile from '@/components/Profile/AppProfile'
 import list from '@/components/Developers/AppDevelopers'
 // import addEmployee from '@/components/User/UserRegistration'
