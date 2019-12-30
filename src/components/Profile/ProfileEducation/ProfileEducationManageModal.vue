@@ -64,15 +64,15 @@ export default {
                 qualifications: this.userData.qualifications
             }
             const response = await UserService.editProfile(updatedInfo, this.$route.query.id)
-            console.log(response)
+            doconsole(response)
             // if (response.status == 200) {
             //     // this.status = '* Record Updated Successfully'
-            //     console.log('success')
+            //     doconsole('success')
             // } else {
             //     // this.status = '* Something Went Wrong'
-            //     console.log('error')
+            //     doconsole('error')
             // }
-            // console.log(this.userData)
+            // doconsole(this.userData)
             // this.hide()
         },
         addEducation() {

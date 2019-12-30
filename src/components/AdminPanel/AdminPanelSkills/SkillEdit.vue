@@ -31,7 +31,7 @@ export default {
             else
                 response = await UserService.addSkillAdmin(this.skillToBeEdit.skill)
             if (response) {
-                console.log(response)
+                doconsole(response)
                 this.$emit('update')
             }
         }

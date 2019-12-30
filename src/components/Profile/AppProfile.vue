@@ -1,18 +1,18 @@
 <template>
 <div id="page-top" class="body">
-    <ProfileHeader v-if="userData" :userData="userData"/>
+    <ProfileHeader v-if="userData" :userData="userData" />
 
-    <ProfileIntroduction v-if="userData" :userData="userData" :canEdit="canEdit" @update="updateUserInfo" />
+    <ProfileIntroduction v-if="userData" :userData="userData" :canEdit="canEdit" @update="getUser" />
 
     <ProfileAbout v-if="userData" :userData="userData" :canEdit="canEdit" />
 
-    <ProfileCertification v-if="userData" :userData="userData" :canEdit="canEdit" @update="updateUserInfo" />
+    <ProfileCertification v-if="userData" :userData="userData" :canEdit="canEdit" @update="getUser" />
 
-    <ProfileEducation v-if="userData" :userData="userData" :canEdit="canEdit" @update="updateUserInfo" />
+    <ProfileEducation v-if="userData" :userData="userData" :canEdit="canEdit" @update="getUser" />
 
-    <ProfileExperience v-if="userData" :userData="userData" :canEdit="canEdit" @update="updateUserInfo" />
+    <ProfileExperience v-if="userData" :userData="userData" :canEdit="canEdit" @update="getUser" />
 
-    <ProfileSkills v-if="userData" :userData="userData" :canEdit="canEdit" @update="updateUserInfo"/>
+    <ProfileSkills v-if="userData" :userData="userData" :canEdit="canEdit" @update="getUser" />
 
     <go-top :max-width="300" :size="60" :right="25" :bottom="50" bg-color="#00aeef"></go-top>
 
@@ -54,26 +54,29 @@ export default {
         ProfileCertification,
     },
     methods: {
-        async getUsers() {
+        async getUser() {
             const response = await UserService.getUserDetails(this.$route.query.id);
-            response ? this.userData = response.data.data: null;
-            console.log(this.userData)
+            response ? this.userData = response.data.data : null;
+            doconsole(this.userData)
         },
-        updateUserInfo() {
-            this.getUsers();
+        showEditButtons() {
+            if (this.$route.query.id == TokenService.getCurrentEmployeeId()) {
+                this.canEdit = true;
+            }
         }
     },
-    beforeUpdate() {
-        if (this.userData.id != this.$route.query.id) {
-            this.userData.id = this.$route.query.id;
-            this.getUsers();
-        }
-        if (this.$route.query.id == TokenService.getCurrentEmployeeId()) {
-            this.canEdit = true;
+    watch: {
+        $route(to, from) {
+            if (to.query.id != from.query.id) {
+                this.userData.id = to.query.id;
+                this.getUser();
+            }
+            this.showEditButtons()
         }
     },
     mounted() {
-        this.getUsers();
+        this.getUser();
+        this.showEditButtons()
         window.scrollTo(0, document.getElementById("page-top").offsetTop);
     }
 };

@@ -28,7 +28,7 @@ export default {
         async addEducation(education) {
             const response = await UserService.addEducation(education, TokenService.getCurrentEmployeeId())
             if (response) {
-                console.log(response)
+                doconsole(response)
                 this.$emit('update')
                 this.$bvModal.hide('add-education')
             }

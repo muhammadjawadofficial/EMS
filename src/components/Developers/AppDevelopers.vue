@@ -7,7 +7,17 @@
 
     List is based on the 'userList' prop
      -->
-    <DevelopersList :usersList="usersList" :pNumber="pageNumber" :pSize="pageSize"></DevelopersList>
+    <DevelopersList 
+    :usersList="usersList" 
+    :pNumber="pageNumber" 
+    :pSize="pageSize" 
+    :pCount="pageCount" 
+    @previousPage="prevPage" 
+    @nextPage="nextPage" 
+    @jumpToPageNumber="jumpToPage"
+    @changeSize="changePageSize"
+    
+    ></DevelopersList>
 </div>
 </template>
 
@@ -24,7 +34,8 @@ export default {
             //information of the developers will be stored here
             usersList: [],
             pageNumber: 0,
-            pageSize: 3
+            pageSize: 3,
+            pageCount: null,
         }
     },
     components: {
@@ -32,18 +43,46 @@ export default {
         DevelopersList,
     },
     methods: {
-
+        nextPage() {
+            if (this.pageNumber < this.pageCount - 1) {
+                this.pageNumber = this.pageNumber + 1
+            }
+        },
+        prevPage() {
+            if (this.pageNumber > 0) {
+                this.pageNumber = this.pageNumber - 1
+            }
+        },
+        jumpToPage(index) {
+            if (index < this.pageCount) {
+                this.pageNumber = index
+            }
+        },
+        changePageSize(pSize){
+            this.pageSize = pSize
+            this.pageNumber = 0
+        }
+    },
+    computed: {
         //function that is used to fetch the records of all developers
         getUsers: async function () {
             const response = await UserService.getUsersDetailsPaginated(this.pageNumber, this.pageSize)
             //storing developer information in the userList array
-            this.usersList = response.data.data
-            doconsole(this.usersList)
+            this.pageCount = Math.ceil(response.data.data.count / this.pageSize)
+            this.usersList = response.data.data.rows
+        }
+    },
+    watch:{
+        pageNumber(){
+            this.getUsers
         },
+        pageSize(){
+            this.getUsers
+        }
     },
     mounted() {
         //initializing the userList array
-        this.getUsers();
+        this.getUsers;
     },
 }
 </script>

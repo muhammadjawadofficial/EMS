@@ -21,7 +21,7 @@ Vue.toasted.register('error',
         
         // if there is no message passed show default message
         if(! payload.message) {
-    	    return "Something Went Wrong.. Please Try Again Later!!"
+    	    return "Something Went Wrong.. Please Try Again!!"
         }
         
         // if there is a message show it with the message

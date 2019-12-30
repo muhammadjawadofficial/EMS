@@ -16,7 +16,7 @@
                 </div>
                 <div class="wrap-input100 validate-input mb-2">
                     <span class="label-input100">Password</span>
-                    <input class="input100" v-model="loginInformation.password" type="password" placeholder="Enter password" autocomplete="current_password" required>
+                    <input class="input100" v-model="loginInformation.password" type="password" placeholder="Enter password" autocomplete="current-password" required>
                     <span class="focus-input100"></span>
                 </div>
                 <div class="container-login100-form-btn">
@@ -30,7 +30,9 @@
 
 <script>
 import UserService from '@/services/user.service'
-import {TokenService} from '@/services/storage.service'
+import {
+    TokenService
+} from '@/services/storage.service'
 import {
     login,
     network_error,

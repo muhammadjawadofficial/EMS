@@ -31,7 +31,7 @@ export default {
             else
                 response = await UserService.addGender(this.genderToBeEdit.gender)
             if (response) {
-                console.log(response)
+                doconsole(response)
                 this.$emit('update')
             }
         }

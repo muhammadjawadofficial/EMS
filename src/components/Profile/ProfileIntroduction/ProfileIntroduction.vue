@@ -21,7 +21,7 @@
                         </div>
 
                         <h2 class="profile-heading-2"><b class="profile-text-weighted">{{userData.firstName}} {{userData.lastName}}</b></h2>
-                        <h4 class="profile-heading-4 font-lite-black">{{userData.designation}}</h4>
+                        <h4 class="profile-heading-4 font-lite-black">{{userData.designation && userData.designation.designation}}</h4>
                         <ul class="profile-ul information margin-tb-30">
                             <li class="profile-li" v-if="userData.gender"><b class="profile-text-weighted">AGE : </b>{{userData.age}}, <b class="profile-text-weighted">GENDER : </b>{{userData.gender.gender}}</li>
                             <li class="profile-li" v-if="userData.employeeLogin"><b class="profile-text-weighted">EMAIL : </b> {{userData.employeeLogin.email}} </li>

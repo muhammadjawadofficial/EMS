@@ -135,11 +135,11 @@ export default {
     methods: {
         async getUsers() {
             const response = await UserService.getUsersDetails()
-            console.log(response)
+            doconsole(response)
             if (!response || !response.data.success) {
                 this.$toasted.global.error()
                 this.$router.push({
-                    path: '/admin/404'
+                    name: 'admin404'
                 })
             } else {
                 this.busy = false
@@ -168,9 +168,9 @@ export default {
                     confirm = value
                 })
             if (confirm) {
-                console.log(userId)
+                doconsole(userId)
                 const response = await UserService.deleteEmployee(userId)
-                console.log(response)
+                doconsole(response)
                 if (response) {
                     this.$toasted.global.success({
                         message: 'Employee Deleted Successfully!'

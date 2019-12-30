@@ -12,9 +12,9 @@ export default {
     },
     methods: {
         async editProfile(updatedInformation) {
-            console.log(updatedInformation)
+            doconsole(updatedInformation)
             const response = await UserService.editProfile(updatedInformation, this.$route.params.id)
-            console.log(response)
+            doconsole(response)
         }
     }
 }

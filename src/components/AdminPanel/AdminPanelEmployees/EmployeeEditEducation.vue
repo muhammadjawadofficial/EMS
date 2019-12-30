@@ -34,7 +34,7 @@ export default {
     methods: {
         async getDegreeLevels() {
             const response = await UserService.getDegreeLevels();
-            console.log(response)
+            doconsole(response)
             this.selectDegreeLevels = response.data.data
         },
         printindex(degreeLevel) {
@@ -45,14 +45,14 @@ export default {
                     return indexOf
                 }
             });
-            // console.log(indexOf)
+            // doconsole(indexOf)
             return indexOf
         },
         passToParent(event) {
             this.$emit('update', event)
         },
         getSingleDegree(x) {
-            // console.log(this.degrees[x])
+            // doconsole(this.degrees[x])
             if (this.degrees[x])
                 return education.set(this.degrees[x])
             return education.get()
@@ -61,7 +61,7 @@ export default {
         async updateInfo(updatedEducation, index, empDegreeId) {
             var response = null
             if (index < 0) {
-                console.log(updatedEducation)
+                doconsole(updatedEducation)
                 response = await UserService.addEducation(updatedEducation, this.$route.params.id)
             } else {
                 response = await UserService.editEducation(updatedEducation, this.$route.params.id, this.degrees[index].empDegree.id)
@@ -70,7 +70,7 @@ export default {
                 this.$emit('update', this.$route.params.id)
         },
         async deleteEducation(degreeIndex) {
-            console.log(this.degrees[degreeIndex])
+            doconsole(this.degrees[degreeIndex])
             const response = await UserService.deleteEducation(this.$route.params.id, this.degrees[degreeIndex].empDegree.id)
             if (response)
                 this.$emit('update', this.$route.params.id)

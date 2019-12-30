@@ -1,7 +1,7 @@
 <template>
 <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color:#392bc0; padding: 0.5rem 1rem;">
     <span style="float: center;">
-        <a class="navbar-brand"><img src="@/assets/db2.png" alt=""></a>
+        <a @click="toProfile" class="navbar-brand"><img src="@/assets/db2.png" alt=""></a>
     </span>
     <!-- <span style="float: right;"><button class="btn btn-warning"></button></span> -->
     <!-- <span style="float: right;"><button class="btn btn-danger"><i class="fa fa-users"></i><i class="fas fa-sign-out-alt"></i></button></span> -->
@@ -49,7 +49,8 @@ export default {
         return {
             canAdd: false,
             current: '/list',
-            navLinks: []
+            navLinks: [],
+            userOwnProfilePath: `/pageProfile?id=${TokenService.getCurrentEmployeeId()}`
         }
     },
     mounted() {
@@ -61,17 +62,17 @@ export default {
 
         this.canAdd = TokenService.getIsAdmin() === 'true' ? true : false;
 
-        // console.log(this.$router.currentRoute)
-        // console.log(this.$router.currentRoute.path)
-        // console.log(this.current)
-        // console.log(this.$router.options.routes)
+        // doconsole(this.$router.currentRoute)
+        // doconsole(this.$router.currentRoute.path)
+        // doconsole(this.current)
+        // doconsole(this.$router.options.routes)
         this.$router.options.routes.forEach(route => {
             if (route.meta)
                 if (route.meta.navigationLink) {
                     if (route.path == '/pageProfile')
                         this.navLinks.push({
                             name: route.name,
-                            path: `/pageProfile?id=${TokenService.getCurrentEmployeeId()}`
+                            path: this.userOwnProfilePath
                         })
                     else if (!(route.path == '/addEmployee' && !this.canAdd))
                         this.navLinks.push({
@@ -85,13 +86,19 @@ export default {
             //     path: route.path
             // })
         })
-        // console.log(this.navLinks)
-        // console.log(this.$router.currentRoute.fullPath)
+        doconsole(this.navLinks)
+        // doconsole(this.$router.currentRoute.fullPath)
     },
     methods: {
+        toProfile() {
+            this.current = this.userOwnProfilePath
+            this.$router.push({
+                path: this.userOwnProfilePath
+            })
+        },
         nextPath(path) {
-            // console.log('current path:' + this.current)
-            // console.log('clicked path: ' + path)
+            // doconsole('current path:' + this.current)
+            // doconsole('clicked path: ' + path)
             if (this.$router.currentRoute.fullPath != path)
                 this.$router.replace({
                     path: path
@@ -120,7 +127,7 @@ export default {
         //         })
         // },
         // toProfile() {
-        //     console.log(this.currentPath())
+        //     doconsole(this.currentPath())
         //     if (this.currentPath() != '/pageProfile')
         //         this.$router.replace({
         //             path: `/pageProfile?id=${TokenService.getCurrentEmployeeId()}`

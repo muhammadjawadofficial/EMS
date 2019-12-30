@@ -65,7 +65,7 @@ export default {
     methods: {
         async getSkills() {
             const response = await UserService.getSkills()
-            console.log(response)
+            doconsole(response)
             if (response) {
                 this.availableSkills = response.data.data
                 this.busy = false
@@ -76,7 +76,7 @@ export default {
             this.skillToBeEdit = skill.get()
         },
         async deleteSkill(skillId) {
-            console.log(skillId)
+            doconsole(skillId)
             const response = await UserService.deleteSkill(skillId)
             if (response) {
                 this.$toasted.global.success({

@@ -65,7 +65,7 @@ export default {
     methods: {
         async getGenders() {
             const response = await UserService.getGenders()
-            console.log(response)
+            doconsole(response)
             if (response) {
                 this.busy = false
                 this.genderToBeEdit = null

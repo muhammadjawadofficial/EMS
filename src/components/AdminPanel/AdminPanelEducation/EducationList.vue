@@ -91,11 +91,11 @@ export default {
     methods: {
         async getDegreeLevels() {
             const response = await UserService.getDegreeLevels();
-            console.log(response)
+            doconsole(response)
             if (!response || !response.data.success) {
                 this.$toasted.global.error()
                 this.$router.push({
-                    path: '404'
+                    name: 'admin404'
                 })
             } else {
                 this.educations = response.data.data

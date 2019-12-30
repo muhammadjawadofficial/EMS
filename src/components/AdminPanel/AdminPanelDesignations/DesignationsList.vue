@@ -65,7 +65,7 @@ export default {
     methods: {
         async getDesignations() {
             const response = await UserService.getDesignations()
-            console.log(response)
+            doconsole(response)
             if (response) {
                 this.busy = false
                 this.designationToBeEdit = null

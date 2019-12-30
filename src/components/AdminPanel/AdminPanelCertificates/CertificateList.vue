@@ -92,7 +92,7 @@ export default {
                 this.availableCertificates = response.data.data
                 this.busy = false
             }
-            console.log(this.availableCertificates)
+            doconsole(this.availableCertificates)
             this.toBeEdit = null
         },
         addCertificate() {

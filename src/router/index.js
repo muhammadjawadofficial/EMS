@@ -98,7 +98,7 @@ const router = new Router({
         },
         {
           path: 'listEmployees/:id',
-          name: 'listEmployees',
+          name: 'editEmployees',
           component: employeeEdit
         },
         {
@@ -108,7 +108,7 @@ const router = new Router({
         },
         {
           path: 'editEducation/:id',
-          name: 'listEducation',
+          name: 'editEducation',
           component: educationEdit
         },
         {
@@ -128,7 +128,7 @@ const router = new Router({
         },
         {
           path: '404',
-          name: '404',
+          name: 'admin404',
           component: page404
         },
         // {

@@ -14,30 +14,8 @@ const server = process.env.NODE_SERVER
 const UserService = {
   //edited
   async login(loginInformation) {
-    return await ApiService.post('employee/login', loginInformation)
-    // try {
-    //   const response = await ApiService.post(server + 'employee/login', loginInformation)
-    //   console.log(response)
-    //   TokenService.saveToken(response.data.token)
-    //   TokenService.saveCurrentEmployeeId(response.data.id)
-    //   TokenService.saveIsAdmin(response.data.isAdmin)
-    //   return response
-    // } catch (e) {
-    //   return e.response
-    // }
+    return await ApiService.postCheck('employee/login', loginInformation)
   },
-
-  // async logout() {
-  //   try {
-  //     const response = await ApiService.post(server + 'employee/logout', {})
-  //     console.log(response.data.message)
-  //     TokenService.removeToken()
-  //     // return true
-  //   } catch (error) {
-  //     alert('error')
-  //     console.log(error.response)
-  //   }
-  // },
 
   async logout() {
     return await ApiService.post('employee/logout', {});
@@ -56,9 +34,9 @@ const UserService = {
     //   const response = await ApiService.post(server + 'auth/signup', userInformation)
     //   return response
     // } catch (e) {
-    //   // console.log(e)
-    //   // console.log(e.message)
-    //   // console.log(e.response)
+    //   // doconsole(e)
+    //   // doconsole(e.message)
+    //   // doconsole(e.response)
     //   return e.response
     // }
   },
@@ -97,7 +75,7 @@ const UserService = {
     //   const response = await ApiService.patch(server + 'Users/editProfile/' + userId, skills)
     //   return response
     // } catch (e) {
-    //   console.log(e.response)
+    //   doconsole(e.response)
     //   return e.response
     // }
   },
@@ -107,10 +85,10 @@ const UserService = {
     return await ApiService.patch(`employee/${userId}/updateDegree/${employeeDegreeId}`, updatedInfo)
     // try {
     //   const response = await ApiService.patch(server + `employee/${userId}/updateDegree/${employeeDegreeId}`, updatedInfo)
-    //   console.log(response.data.success)
+    //   doconsole(response.data.success)
     //   return response.data.success
     // } catch (error) {
-    //   console.log(error.response)
+    //   doconsole(error.response)
     //   return error.response.data.success
     // }
   },
@@ -121,7 +99,7 @@ const UserService = {
     //   const response = await ApiService.patch(server + 'Users/editProfile/' + userId, certifications)
     //   return response
     // } catch (e) {
-    //   console.log(e.response)
+    //   doconsole(e.response)
     //   return e.response
     // }
   },
@@ -131,11 +109,11 @@ const UserService = {
     return await ApiService.post(`employee/${userId}/addCertificate`, certification)
     // try {
     //   const response = await ApiService.post(server + `employee/${userId}/addCertificate`, certification)
-    //   console.log(response)
+    //   doconsole(response)
     //   return response
     // } catch (e) {
-    //   console.log('error')
-    //   console.log(e.response)
+    //   doconsole('error')
+    //   doconsole(e.response)
     //   return e.response
     // }
   },
@@ -145,11 +123,11 @@ const UserService = {
     return await ApiService.post(`employee/${userId}/addDegree`, education)
     // try {
     //   const response = await ApiService.post(server + `employee/${userId}/addDegree`, education)
-    //   console.log(response.data)
+    //   doconsole(response.data)
     //   return response.data
     // } catch (e) {
-    //   console.log('error')
-    //   console.log(e.response.data)
+    //   doconsole('error')
+    //   doconsole(e.response.data)
     //   return e.response.data.success
     // }
   },
@@ -162,11 +140,11 @@ const UserService = {
     //   const response = await ApiService.put(server + 'Users/addSkills', {
     //     skills: skill.trim()
     //   })
-    //   console.log(response)
+    //   doconsole(response)
     //   return response
     // } catch (e) {
-    //   console.log('error')
-    //   console.log(e.response)
+    //   doconsole('error')
+    //   doconsole(e.response)
     //   return e.response
     // }
   },
@@ -184,10 +162,10 @@ const UserService = {
     return await ApiService.get('gender/getGenders')
     // try {
     //   const response = await ApiService.get(server + 'gender/getGenders')
-    //   // console.log(response)
+    //   // doconsole(response)
     //   return response.data.genders
     // } catch (e) {
-    //   console.log('error occured while fetching recoreds')
+    //   doconsole('error occured while fetching recoreds')
     //   return e.response
     // }
   },
@@ -200,10 +178,10 @@ const UserService = {
     return await ApiService.get('country/getCountries')
     // try {
     //   const response = await ApiService.get(server + 'country/getCountries')
-    //   // console.log(response.data.countries)
+    //   // doconsole(response.data.countries)
     //   return response.data.countries
     // } catch (error) {
-    //   console.log('error occured while fetching recoreds')
+    //   doconsole('error occured while fetching recoreds')
     //   return error.response
     // }
   },
@@ -212,10 +190,10 @@ const UserService = {
     return await ApiService.get(`country/${countryId}/getCities`)
     // try {
     //   const response = await ApiService.get(`${server}country/${countryId}/getCities`)
-    //   // console.log(response.data.countries.cities)
+    //   // doconsole(response.data.countries.cities)
     //   return response.data.countries.cities
     // } catch (error) {
-    //   console.log('error occured while fetching recoreds')
+    //   doconsole('error occured while fetching recoreds')
     //   return error.response
     // }
   },
@@ -244,7 +222,7 @@ const UserService = {
     return await ApiService.get(`degreeLevel/getLevel/${degreeLevelId}`)
     // try {
     //   const response = await ApiService.get(server + `degreeLevel/${degreeLevelId}/getDegree`)
-    //   console.log(response)
+    //   doconsole(response)
     //   return response.data.degrees
     // } catch (error) {
     //   return error.response
@@ -255,7 +233,7 @@ const UserService = {
     return await ApiService.get(`degreeLevel/getLevel/${degreeLevelId}`)
     // try {
     //   const response = await ApiService.get(server + `degreeLevel/getLevel/${degreeLevelId}`)
-    //   console.log(response)
+    //   doconsole(response)
     //   return response
     // } catch (error) {
     //   return error.response
@@ -372,7 +350,11 @@ const UserService = {
   },
 
   async getSkillsChartData(){
-    return await ApiService.get(`employee/getEmployeeCount`);
+    return await ApiService.get(`employee/getEmpSkillCount`);
+  },
+
+  async getSkillsDesignationData(){
+    return await ApiService.get(`employee/getEmpDesignationCount`);
   },
 
   async addEmployeeExperience(experience, userId){

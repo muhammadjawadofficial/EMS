@@ -38,8 +38,7 @@
                         </li>
                     </ul> -->
                     
-                    <button class="btn btn-success" @click="emitAction('view')">View Profile</button>
-                    <button v-if="canDelete" class="btn btn-danger" @click="emitAction('delete')">Delete Profile</button>
+                    <button class="btn btn-success" @click="showProfile(user.id)">View Profile</button>
                 </div>
             </div>
         </div>
@@ -65,12 +64,12 @@ export default {
     },
     props: ['user'],
     methods: {
-        emitAction(buttonAction) {
-            // console.log(this.$el)
-            this.$emit('buttonClicked', {
-                buttonAction: buttonAction,
-                id: this.user.id
-            })
+        //used to show the profile of the developer on which the user clicks (on ViewProfile button)
+        showProfile(userId) {
+            //redirect to the requested profile
+            this.$router.replace({
+                path: `/pageProfile?id=${userId}`
+            });
         },
     },
     computed: {
@@ -82,8 +81,8 @@ export default {
         }
     },
     mounted() {
-        // console.log(this.canDelete)
-        // console.log(this.user)
+        // doconsole(this.canDelete)
+        // doconsole(this.user)
         if (localStorage.getItem('isAdmin') == "true")
             this.canDelete = true;
     }

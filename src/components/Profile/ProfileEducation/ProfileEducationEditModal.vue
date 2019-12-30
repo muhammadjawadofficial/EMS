@@ -24,8 +24,8 @@ export default {
     },
     methods: {
         async editEducation(education) {
-            console.log('education update')
-            console.log(education)
+            doconsole('education update')
+            doconsole(education)
             const response = await UserService.editEducation(education, this.$route.query.id, this.userData.degrees[this.editEducationIndex].empDegree.id)
             if (response) {
                 this.$emit('update')

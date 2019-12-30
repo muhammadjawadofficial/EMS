@@ -83,11 +83,11 @@ export default {
             }
         },
         addDegree(x) {
-            // console.log(x)
+            // doconsole(x)
             this.educationDetails.degrees.push({
                 degreeName: x
             })
-            console.log(this.educationDetails)
+            doconsole(this.educationDetails)
         },
         async addADegree() {
             if (this.isNewDegree) {
@@ -98,7 +98,7 @@ export default {
                     levelId: this.educationDetails.id,
                     degreeName: this.newDegree
                 }
-                console.log(degreeObject)
+                doconsole(degreeObject)
                 const response = await UserService.addADegreeToExistingLevel(degreeObject)
                 if (response) {
                     this.$toasted.global.success()
@@ -120,9 +120,9 @@ export default {
                 this.educationDetails.degrees.forEach(degree => {
                     newDegrees.degrees.push(degree.degreeName)
                 })
-                console.log(newDegrees)
+                doconsole(newDegrees)
                 const response = await UserService.addDegreesWithLevel(newDegrees)
-                console.log(response)
+                doconsole(response)
                 if (response) {
                     this.$toasted.global.success({
                         message: 'Degree added Successfully!'
@@ -135,14 +135,14 @@ export default {
                 const response = await UserService.updateDegree(this.educationDetails)
                 if (response)
                     this.getDegreeDetails()
-                console.log(response)
+                doconsole(response)
             }
         },
 
         deleteDegree(index) {
-            // console.log(this.educationDetails)
+            // doconsole(this.educationDetails)
             this.educationDetails.degrees.splice(index, 1);
-            // console.log(x)
+            // doconsole(x)
         }
     }
 }

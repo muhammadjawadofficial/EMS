@@ -17,7 +17,7 @@
             </div><!-- col-sm-4 -->
             <div class="col-sm-8">
                 <div class="profile-paragraph margin-b-50">
-                    <li class="profile-skill list-inline-item" v-for="skill in userData.skills" :key="skill.id">
+                    <li class="profile-skill list-inline-item color-purple" v-for="(skill) in userData.skills" :key="skill.id">
                         {{skill.skill}}
                     </li>
                 </div>
@@ -25,7 +25,7 @@
         </div><!-- row -->
     </div><!-- container -->
     <!-- <ProfileSkillsAddModal :userData="userData" /> -->
-    <ProfileSkillsEditModal :skills="userData.skills" @update="$emit('update')"/>
+    <ProfileSkillsEditModal :skills="userData.skills" @update="$emit('update')" />
 </section><!-- about-section -->
 </template>
 
@@ -35,14 +35,8 @@ import ProfileSkillsEditModal from './ProfileSkillsEditModal'
 export default {
     props: ['userData', 'canEdit'],
     components: {
-        // ProfileSkillsAddModal,
         ProfileSkillsEditModal,
     },
-    methods: {
-        showModal(modalName) {
-            this.$modal.show(modalName)
-        }
-    }
 }
 </script>
 
@@ -53,5 +47,9 @@ export default {
     border-radius: 9px;
     text-decoration: none;
     margin: 4px;
+}
+
+.color-purple{
+    color: #392bc0
 }
 </style>

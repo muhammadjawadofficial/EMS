@@ -13,52 +13,21 @@ Vue.use(router)
 const server = process.env.NODE_SERVER
 
 function errorCheck(error) {
-  // if (!error.response || !error.response.success) {
-    // console.log('network error')
-    Vue.toasted.global.error()
-    console.log(error.response)
-    // router.replace({
-    //   path: '/404'
-    // })
-    return error.response
-  // }
-  //   else if (!error.response.success)
-  //     console.log('something went wrong')
+  if(error.response)
+  {
+    if(!error.response.data.status)
+    {
+      Vue.toasted.global.error()
+      return error.response
+    }
+  }
+  Vue.toasted.global.error({ message: 'Check Your Internet Connection and then Try Again!!' })
+  router.replace({
+    path: '/404'
+  })
 }
 
 const ApiService = {
-
-//   init(baseURL) {
-//       axios.defaults.baseURL = baseURL;
-//     },
-
-//   setHeader() {
-//       axios.defaults.headers.common["Authorization"] = `Bearer ${TokenService.getToken()}`
-//     },
-
-//   removeHeader() {
-//       axios.defaults.headers.common = {}
-//     },
-
-//   get(resource) {
-//     return axios.get(resource, headers)
-//   },
-
-//   post(resource, data) {
-//     return axios.post(resource, data, headers)
-//   },
-
-//   patch(resource, data) {
-//     return axios.patch(resource, data, headers)
-//   },
-
-//   put(resource, data) {
-//     return axios.put(resource, data, headers)
-//   },
-
-//   delete(resource) {
-//     return axios.delete(resource, headers)
-//   },
 
   async get(resource) {
     try {
@@ -73,6 +42,14 @@ const ApiService = {
       return await axios.post(server + resource, data, auth.getHeaders())
     } catch (error) {
       errorCheck(error) 
+    }
+  },
+
+  async postCheck(resource, data) {
+    try {
+      return await axios.post(server + resource, data, auth.getHeaders())
+    } catch (error) {
+      return errorCheck(error) 
     }
   },
 

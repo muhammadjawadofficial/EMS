@@ -62,7 +62,7 @@
                 <div class="card-header card-header-primary">
                     Total Number of Employees
                 </div>
-                <Chart height="250" class="p-2" :chart-data="datacollection" :options="options"></Chart>
+                <Chart :height="250" class="p-2" :chart-data="dataSkillCollection" :options="options"></Chart>
             </div>
         </div>
         <div class="col-sm-6 col-12">
@@ -70,7 +70,7 @@
                 <div class="card-header card-header-primary">
                     Total Number of Employees
                 </div>
-                <Chart height="250" class="p-2" :chart-data="datacollection" :options="options"></Chart>
+                <Chart :height="250" class="p-2" :chart-data="dataDesignationCollection" :options="options"></Chart>
             </div>
         </div>
     </div>
@@ -91,7 +91,8 @@ export default {
     },
     data() {
         return {
-            datacollection: null,
+            dataSkillCollection: null,
+            dataDesignationCollection: null,
             countValue: 10,
             startVal: 0,
             endVal: 2017,
@@ -101,17 +102,31 @@ export default {
                         ticks: {
                             beginAtZero: true,
                             stepSize: 1
+                        },
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            display: false
                         }
                     }]
+                },
+                tooltips: {
+                    enabled: true,
+                    callbacks: {
+                        label: ((tooltipItems, data) => {
+                            return tooltipItems.yLabel + ' Employees'
+                        })
+                    }
                 }
-            }
+            },
         }
     },
     mounted() {
-        this.fillData()
+        this.fillSkillChartData()
+        this.fillDesignationChartData()
     },
     methods: {
-        async fillData() {
+        async fillSkillChartData() {
             const response = await UserService.getSkillsChartData();
 
             var chartLabels = []
@@ -122,10 +137,34 @@ export default {
                 chartData.push(skill.count)
             })
 
-            this.datacollection = {
+            this.dataSkillCollection = {
                 labels: chartLabels,
                 datasets: [{
-                    label: 'No. of Employees',
+                    label: 'Employees - Skill Chart',
+                    backgroundColor: 'rgba(0, 0, 255, 0.2)',
+                    borderColor: 'lightblue',
+                    pointBackgroundColor: 'blue',
+                    borderWidth: 1,
+                    pointBorderColor: 'blue',
+                    data: chartData
+                }]
+            }
+        },
+        async fillDesignationChartData() {
+            const response = await UserService.getSkillsDesignationData();
+
+            var chartLabels = []
+            var chartData = []
+
+            response.data.data.forEach(designation => {
+                chartLabels.push(designation.designation)
+                chartData.push(designation.count)
+            })
+
+            this.dataDesignationCollection = {
+                labels: chartLabels,
+                datasets: [{
+                    label: 'Employees - Designation Chart',
                     backgroundColor: 'rgba(0, 0, 255, 0.2)',
                     borderColor: 'lightblue',
                     pointBackgroundColor: 'blue',

@@ -30,7 +30,7 @@ export default {
     methods: {
         changePicture(action) {
             if (action == 'delete') {
-                console.log('delete')
+                doconsole('delete')
                 this.onUpload()
             } else
                 document.getElementById("fileInput").click();
@@ -38,36 +38,36 @@ export default {
         onFileChanged() {
             var image = this.$refs.file.files[0]
             var imageType = image.type.split('/')[0]
-            // if (imageType != 'image')
-            //     this.$toasted.global.error({
-            //         message: 'Please select a valid image'
-            //     })
-            // else if (image.size > 65536)
-            //     this.$toasted.global.error({
-            //         message: 'Profile image size is max 65KB'
-            //     })
-            // else {
+            if (imageType != 'image')
+                this.$toasted.global.error({
+                    message: 'Please select a valid image'
+                })
+            else if (image.size > 65536)
+                this.$toasted.global.error({
+                    message: 'Profile image size is max 65KB'
+                })
+            else {
                 this.selectedFile = image;
                 this.onUpload();
-            // }
+            }
         },
         onUpload() {
-            console.log('hello')
+            doconsole('hello')
             var formData = {}
             if (this.selectedFile) {
-                console.log('fileselected')
+                doconsole('fileselected')
                 formData = new FormData();
                 formData.append('image', this.selectedFile, this.selectedFile.name);
             }
             this.uploadImage(formData)
         },
         async uploadImage(imageData) {
-            console.log('uplodad')
+            doconsole('uplodad')
             var employeeId = null
             this.$route.params.id ? employeeId = this.$route.params.id : employeeId = this.$route.query.id
             const response = await UserService.changeProfilePicture(imageData, employeeId)
             if (response) {
-                console.log(response)
+                doconsole(response)
                 this.$emit('update')
                 this.selectedFile = null
                 this.$refs.file.value = ""

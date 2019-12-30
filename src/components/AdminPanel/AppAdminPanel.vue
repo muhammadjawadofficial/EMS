@@ -42,8 +42,8 @@
         </div> -->
         <div class="sidebar-wrapper">
             <ul class="nav">
-                <li v-for="link in sideBarLinks" :key="link.id" class="nav-item" :class="[ current() === link.name ? 'active' : '']">
-                    <router-link class="nav-link" :to="{name: link.name}"><span v-html="link.icon"></span>
+                <li v-for="link in sideBarLinks" :key="link.id" class="nav-item" :class="[ link.name.includes(current()) ? 'active' : '']">
+                    <router-link class="nav-link" :to="{name: link.name[0]}"><span v-html="link.icon"></span>
                         <p>{{link.text}}</p>
                     </router-link>
                 </li>
@@ -100,37 +100,37 @@ export default {
             adminName: '',
             adminId: TokenService.getCurrentEmployeeId(),
             sideBarLinks: [{
-                    name: 'dashboard',
+                    name: ['dashboard'],
                     icon: '<i class="fas fa-tachometer-alt"></i>',
                     text: 'Dashboard'
                 },
                 {
-                    name: 'listEmployees',
+                    name: ['listEmployees', 'editEmployees'],
                     icon: '<i class="fas fa-users"></i>',
                     text: 'Employees'
                 },
                 {
-                    name: 'listSkill',
+                    name: ['listSkill'],
                     icon: '<i class="fas fa-laptop-code"></i>',
                     text: 'Skills'
                 },
                 {
-                    name: 'listEducation',
+                    name: ['listEducation', 'editEducation'],
                     icon: '<i class="fas fa-graduation-cap"></i>',
                     text: 'Educations'
                 },
                 {
-                    name: 'listCertificate',
+                    name: ['listCertificate'],
                     icon: '<i class="fas fa-certificate"></i>',
                     text: 'Certifications'
                 },
                 {
-                    name: 'listDesignations',
+                    name: ['listDesignations'],
                     icon: '<i class="fas fa-user-tag"></i>',
                     text: 'Designations'
                 }
                 // {
-                //     name: 'listGenders',
+                //     name: ['listGenders'],
                 //     icon: '<i class="fas fa-venus-mars"></i>',
                 //     text: 'Genders'
                 // },
@@ -153,8 +153,8 @@ export default {
     },
     async mounted() {
         const response = await UserService.getUserDetails(TokenService.getCurrentEmployeeId())
-        console.log('admin data')
-        console.log(response.data.data)
+        doconsole('admin data')
+        doconsole(response.data.data)
         const data = response.data.data
         this.adminName = data.firstName + ' ' + data.lastName
         this.adminImage = data.image.data
