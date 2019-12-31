@@ -3,10 +3,12 @@ import axios from 'axios'
 import auth from '@/services/auth.service'
 
 import Vue from 'vue'
+
 import toasted from 'vue-toasted'
 Vue.use(toasted)
-import router from '@/router'
-Vue.use(router)
+
+// import router from '../router/index'
+// Vue.use(router)
 
 const server = process.env.NODE_SERVER
 
@@ -20,9 +22,9 @@ function errorCheck(error) {
     }
   }
   Vue.toasted.global.error({ message: 'Check Your Internet Connection and then Try Again!!' })
-  router.replace({
-    path: '/404'
-  })
+  // router.replace({
+  //   path: '/404'
+  // })
 }
 
 const ApiService = {
