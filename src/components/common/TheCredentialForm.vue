@@ -44,7 +44,7 @@ export default {
             this.colStyle = false
             this.$set(this.newLoginInformation, 'currentPassword', '')
         }
-        doconsole(this.newLoginInformation)
+
     },
     data() {
         return {

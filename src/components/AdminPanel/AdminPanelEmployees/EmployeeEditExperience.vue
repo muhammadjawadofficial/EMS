@@ -34,15 +34,15 @@ export default {
             }
         },
         async deleteExperience(experienceIndex) {
-            // doconsole(this.experiences[experienceIndex].empExperiences.id)
+
             const response = await UserService.deleteEmployeeExperience(this.$route.params.id, this.experiences[experienceIndex].id)
             if (response)
                 this.$emit('update')
         }
     },
     mounted() {
-        doconsole('experience')
-        doconsole(this.experiences)
+
+
     },
 }
 </script>

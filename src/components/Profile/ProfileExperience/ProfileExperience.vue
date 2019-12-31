@@ -3,7 +3,7 @@
     <section class="section experience-section section">
         <div class="container">
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-12 col-md-4">
                     <div class="heading">
                         <h3 class="profile-heading-3"><b class="profile-text-weighted">Work Experience</b></h3>
                         <h6 class="profile-heading-6 font-lite-black"><b class="profile-text-weighted">PREVIOUS JOBS</b></h6>
@@ -14,22 +14,24 @@
                         </span>
                     </div>
                 </div><!-- col-sm-4 -->
-                <div class="col-sm-8">
-                    <div v-for="(experience, index) in userData.empWorkExperiences" :key="index" class="experience margin-b-50">
-                        <b-button v-if="canEdit" class="float-right" @click="deleteExperience(index)" variant="danger"><i class="fas fa-trash-alt"></i></b-button>
-                        <b-button v-if="canEdit" class="float-right mr-1" @click="editExperienceIndex = index, $bvModal.show('edit-experience')" variant="primary"><i class="far fa-edit"></i></b-button>
-                        
-                        <!-- <b-button class="float-right" v-if="canEdit" @click="editExperienceIndex = index, $bvModal.show('edit-experience')" variant="light"><i class="far fa-edit"></i></b-button> -->
-                        <h4 class="profile-heading-4"><b class="profile-text-weighted">{{experience.designation}}</b></h4>
-                        <h5 class="profile-heading-5 font-lite-black"><b class="profile-text-weighted">{{experience.company}}</b></h5>
-                        <h6 class="profile-heading-6 margin-t-10">{{experience.startYear}} - {{experience.endYear}}</h6>
-                        <p class="profile-paragraph font-semi-white margin-tb-30">{{experience.jobDescription}}</p>
-                        <!-- <ul class="profile-ul list margin-b-30">
+                <div class="col-sm-12 col-md-8">
+                    <div class="row">
+                        <div v-for="(experience, index) in userData.empWorkExperiences" :key="index" class="experience margin-b-50 col-sm-6">
+                            <b-button v-if="canEdit" class="float-right" @click="deleteExperience(index)" variant="danger"><i class="fas fa-trash-alt"></i></b-button>
+                            <b-button v-if="canEdit" class="float-right mr-1" @click="editExperienceIndex = index, $bvModal.show('edit-experience')" variant="primary"><i class="far fa-edit"></i></b-button>
+
+                            <!-- <b-button class="float-right" v-if="canEdit" @click="editExperienceIndex = index, $bvModal.show('edit-experience')" variant="light"><i class="far fa-edit"></i></b-button> -->
+                            <h4 class="profile-heading-4"><b class="profile-text-weighted">{{experience.designation}}</b></h4>
+                            <h5 class="profile-heading-5 font-lite-black"><b class="profile-text-weighted">{{experience.company}}</b></h5>
+                            <h6 class="profile-heading-6 margin-t-10">{{experience.startYear}} - {{experience.endYear}}</h6>
+                            <p class="profile-paragraph font-semi-white margin-tb-30">{{experience.jobDescription}}</p>
+                            <!-- <ul class="profile-ul list margin-b-30">
                             <li class="profile-li">Duis non volutpat arcu, eu mollis tellus.</li>
                             <li class="profile-li">Quis consequat nulla effi citur at.</li>
                             <li class="profile-li">Sed finibus aliquam neque sit.</li>
                         </ul> -->
-                    </div><!-- experience -->
+                        </div><!-- experience -->
+                    </div>
                 </div><!-- col-sm-8 -->
             </div><!-- row -->
         </div><!-- container -->

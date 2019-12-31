@@ -81,8 +81,8 @@ export default {
         }
     },
     mounted() {
-        // doconsole(this.canDelete)
-        // doconsole(this.user)
+
+
         if (localStorage.getItem('isAdmin') == "true")
             this.canDelete = true;
     }

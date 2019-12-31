@@ -24,7 +24,7 @@ export default {
     },
     methods: {
         async editExperience(experience) {
-            doconsole(experience)
+
             const response = await UserService.editEmployeeExperience(experience, this.$route.query.id, this.userData.empWorkExperiences[this.editExperienceIndex].id)
             if (response) {
                 this.$emit('update')

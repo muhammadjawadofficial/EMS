@@ -23,7 +23,7 @@ export default {
     },
     methods: {
         async addCertification(certificate) {
-            doconsole(certificate)
+
             var employeeID = null
             if (this.$route.query.id)
                 employeeID = this.$route.query.id

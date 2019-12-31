@@ -50,6 +50,6 @@ export default {
 }
 
 .color-purple{
-    color: #392bc0
+    color: #1d5fcb
 }
 </style>

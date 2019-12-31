@@ -78,13 +78,13 @@ export default {
     methods: {
         async getDesignations(){
             const response = await UserService.getDesignations()
-            doconsole(response.data.data)
+
             this.availableDesignations = response.data.data
         },
         async onSubmit() {
-            doconsole(this.form)
+
             const response = await UserService.registerEmployee(this.form)
-            doconsole(response)
+
             if(response){
                 this.$toasted.global.success({message: 'Employee Successfully Created'})
                 this.$bvModal.hide('add-employee')

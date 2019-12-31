@@ -55,7 +55,7 @@ export default {
         },
         async addSkill() {
             const response = await UserService.addSkill(this.newSkill)
-            doconsole(response)
+
             if (response.status == 200) {
                 this.userData.skills.push(this.newSkill)
                 this.newSkill = ''

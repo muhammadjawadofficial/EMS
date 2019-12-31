@@ -30,7 +30,7 @@ export default {
     methods: {
         changePicture(action) {
             if (action == 'delete') {
-                doconsole('delete')
+
                 this.onUpload()
             } else
                 document.getElementById("fileInput").click();
@@ -52,22 +52,22 @@ export default {
             }
         },
         onUpload() {
-            doconsole('hello')
+
             var formData = {}
             if (this.selectedFile) {
-                doconsole('fileselected')
+
                 formData = new FormData();
                 formData.append('image', this.selectedFile, this.selectedFile.name);
             }
             this.uploadImage(formData)
         },
         async uploadImage(imageData) {
-            doconsole('uplodad')
+
             var employeeId = null
             this.$route.params.id ? employeeId = this.$route.params.id : employeeId = this.$route.query.id
             const response = await UserService.changeProfilePicture(imageData, employeeId)
             if (response) {
-                doconsole(response)
+
                 this.$emit('update')
                 this.selectedFile = null
                 this.$refs.file.value = ""

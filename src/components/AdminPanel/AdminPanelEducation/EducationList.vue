@@ -91,7 +91,7 @@ export default {
     methods: {
         async getDegreeLevels() {
             const response = await UserService.getDegreeLevels();
-            doconsole(response)
+
             if (!response || !response.data.success) {
                 this.$toasted.global.error()
                 this.$router.push({

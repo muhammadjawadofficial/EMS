@@ -51,6 +51,7 @@ export default {
         async signIn() {
             this.error = login.check
             const response = await UserService.login(this.loginInformation)
+
             if (!response) {
                 this.error = network_error
             } else {

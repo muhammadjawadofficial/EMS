@@ -26,10 +26,10 @@ export default {
                 response = await UserService.updateCertificate(this.certificate.id, this.editCertficate)
             else
                 response = await UserService.addCertificateAdmin(this.editCertficate)
-            // doconsole(this.editCertficate)
+
             if (response)
                 this.$emit('update')
-            doconsole(response)
+
         }
     },
     watch: {

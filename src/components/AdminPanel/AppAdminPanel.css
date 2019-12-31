@@ -13028,7 +13028,6 @@ fieldset[disabled] .form-group .form-control {
   border: 0;
   border-radius: 3px;
   padding: 0.625rem 0;
-  margin-bottom: 20px;
   height: auto !important;
   color: #eee;
   background-color: #fff !important;
@@ -13048,7 +13047,6 @@ fieldset[disabled] .form-group .form-control {
 
 .navbar.fixed-top {
   border-radius: 0;
-  position: sticky !important;
 }
 
 .navbar .navbar-nav .nav-item .nav-link {
@@ -14944,6 +14942,7 @@ table .flip-list-move {
   float: right;
   width: calc(100% - 260px);
   transition: 0.33s, cubic-bezier(0.685, 0.0473, 0.346, 1);
+  margin-top: 70px;
 }
 
 .main-panel>.content {
@@ -18101,6 +18100,13 @@ Copyright (c) 2015 Daniel Eden
   }
 }
 
+@media(max-width: 991px)
+{
+  .navbar-expand-md .navbar-toggler{
+    display: block
+  }
+}
+
 @media screen and (max-width: 991px) {
   .presentation-page .section-components .components-macbook {
     max-width: 850px !important;
@@ -18308,7 +18314,7 @@ Copyright (c) 2015 Daniel Eden
   }
   .main-panel {
     width: 100%;
-    margin-top: 69px;
+    margin-top: 60px;
   }
   .navbar-transparent {
     padding-top: 15px;
@@ -18395,7 +18401,7 @@ Copyright (c) 2015 Daniel Eden
   .off-canvas-sidebar nav .navbar-collapse {
     position: fixed;
     display: block;
-    top: 69px;
+    top: 60px;
     height: 100vh;
     width: 260px;
     right: auto;

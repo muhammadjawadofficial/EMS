@@ -45,6 +45,7 @@
 	width: 100%;
 	height: 100%;
 	margin: 0;
+  min-height: 11vh;
 	font-weight: 400;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -241,7 +242,7 @@
 3. HEADER
 --------------------------------- */
 
-.header{ position: absolute; top: 70px; left: 0; right: 0; z-index: 2; }
+.header{ position: absolute; top: 70px; left: 0; right: 0; z-index: 2;}
 
 .header .heading-wrapper{ border-radius: 5px; padding: 30px 40px 20px; background: #00aeef; color: #fff; }
 
@@ -316,6 +317,27 @@
 	cursor: pointer
 }
 
+.btn-danger {
+  color: #fff;
+  background-color: #a50210;
+  border-color: #a50210;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #3772d1;
+  border-color: #3772d1;
+}
+
+.btn-outline-primary {
+  color: #3772d1;
+  border-color: #3772d1;
+}
+
+.btn-outline-danger {
+  color: #a50210;
+  border-color: #a50210;
+}
 /* .profile-img:after {
     content:'\f030 Change Image';
     position:absolute;
@@ -389,7 +411,8 @@
 7. EXPERIENCE SECTION
 --------------------------------- */
 
-.experience-section{ background: #392bc0; color: #fff; }
+.experience-section{ background: #1D5FCB; color: #fff; background-image: url(https://devbatch.com/wp-content/uploads/2019/02/blog-2-1-1.png);
+  background-position-x: right; background-repeat: repeat-y;}
 
 .experience .list > li{ display: block; position: relative; margin-bottom: 10px; padding-left: 20px; }
 
@@ -410,7 +433,7 @@
 
 .education-wrapper .education:after{ content:''; position: absolute; top: 8px; left: -58px; width: 16px; 
 	height: 16px; border-radius: 10px; z-index: 1;
-	box-shadow: 0 0 0 8px rgb(0, 174, 239); background: #392bc0; }
+	box-shadow: 0 0 0 8px rgb(0, 174, 239); background: #1d5fcb; }
 	
 /* ---------------------------------
 10. FOOTER

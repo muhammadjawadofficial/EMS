@@ -57,7 +57,7 @@ export default {
         async getUser() {
             const response = await UserService.getUserDetails(this.$route.query.id);
             response ? this.userData = response.data.data : null;
-            doconsole(this.userData)
+
         },
         showEditButtons() {
             if (this.$route.query.id == TokenService.getCurrentEmployeeId()) {
@@ -75,6 +75,7 @@ export default {
         }
     },
     mounted() {
+
         this.getUser();
         this.showEditButtons()
         window.scrollTo(0, document.getElementById("page-top").offsetTop);

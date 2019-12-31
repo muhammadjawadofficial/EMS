@@ -40,15 +40,15 @@ export default {
                 certifications: this.userData.certifications
             }
             const response = await UserService.editProfile(updatedInfo, this.$route.query.id)
-            doconsole(response)
+
             // if (response.status == 200) {
             //     // this.status = '* Record Updated Successfully'
-            //     doconsole('success')
+
             // } else {
             //     // this.status = '* Something Went Wrong'
-            //     doconsole('error')
+
             // }
-            // doconsole(this.userData)
+
             // this.hide()
         },
         deleteCertification(index) {

@@ -1,35 +1,6 @@
 <template>
 <div class="wrapper ">
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
-        <div class="container-fluid">
-            <button class="navbar-toggler sidebar-toggler" type="button" data-toggle="collapse" data-target="#navigationIndex" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="navbar-toggler-icon icon-bar"></span>
-                <span class="navbar-toggler-icon icon-bar"></span>
-                <span class="navbar-toggler-icon icon-bar"></span>
-            </button>
-            <div class="logo" style="text-align:center">
-                <img src="@/assets/db2.png" alt="DevBatch-logo">
-            </div>
-            <div class="collapse navbar-collapse justify-content-end" id="navigationIndex">
-                <ul class="navbar-nav">
-                    <b-nav-item-dropdown right>
-                        <!-- Using 'button-content' slot -->
-                        <template v-slot:button-content>
-                            <img :src="dataUrl" height="30" alt="user-image"/> {{adminName}}
-                        </template>
-                        <b-dropdown-item :to="'/admin/listEmployees/' + adminId">Profile</b-dropdown-item>
-                        <b-dropdown-item @click="logout()">Sign Out</b-dropdown-item>
-                    </b-nav-item-dropdown>
-                    <!-- <li class="nav-item">
-                        <button class="btn btn-danger" @click="logout()">Logout</button>
-                    </li> -->
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!-- End Navbar -->
+
     <div class="sidebar" data-color="purple" data-background-color="white">
         <!--
       Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
@@ -152,17 +123,21 @@ export default {
         },
     },
     async mounted() {
+
         const response = await UserService.getUserDetails(TokenService.getCurrentEmployeeId())
-        doconsole('admin data')
-        doconsole(response.data.data)
+
+
         const data = response.data.data
         this.adminName = data.firstName + ' ' + data.lastName
         this.adminImage = data.image.data
     },
     computed: {
         dataUrl() {
-            return image.convert(this.adminImage)
-        }
+            return image.convert(this.$store.getters.USERIMAGE)
+        },
+        fullName(){
+            return this.$store.getters.USERNAME
+        },
     },
 }
 </script>

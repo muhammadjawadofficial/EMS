@@ -96,7 +96,7 @@ export default {
     },
     mounted() {
         this.getDegreeLevels();
-        doconsole(this.newEducation)
+
         this.degreeId ? this.newEducation.degreeLevelId = this.degreeId : ''
         this.newEducation.degreeLevelId ? this.getDegreeTypes(this.newEducation.degreeLevelId) : ''
     },

@@ -34,7 +34,7 @@ export default {
             }
         },
         async deleteCertification(certificationIndex) {
-            doconsole(this.certificates[certificationIndex].empCertifications.id)
+
             const response = await UserService.deleteCertification(this.$route.params.id, this.certificates[certificationIndex].empCertifications.id)
             if (response)
                 this.$emit('update')

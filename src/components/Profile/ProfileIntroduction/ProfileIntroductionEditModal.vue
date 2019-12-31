@@ -137,10 +137,10 @@ export default {
         // this.getGenders();
         // this.getCountries();
         // this.getCities(this.userData.countryId)
-        doconsole('inside modal')
-        doconsole(this.userData)
+
+
         this.updatedInformation = basicInfo.set(this.userData)
-        doconsole(this.updatedInformation)
+
     }
 }
 </script>

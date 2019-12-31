@@ -1,7 +1,5 @@
 import axios from 'axios'
-import {
-  TokenService
-} from '@/services/storage.service'
+
 import auth from '@/services/auth.service'
 
 import Vue from 'vue'

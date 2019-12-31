@@ -1,5 +1,5 @@
 <template>
-<div class="copyright">
+<div class="profile-copyright">
     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
     Copyright &copy; 2019 All rights reserved
     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -13,7 +13,7 @@ export default {
 </script>
 
 <style>
-.copyright {
+.profile-copyright {
     text-align: center;
     padding: 30px 0;
     background: #392bc0;

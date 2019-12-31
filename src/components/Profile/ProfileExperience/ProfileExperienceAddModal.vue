@@ -27,10 +27,10 @@ export default {
     methods: {
         async addExperience(experience) {
             let userId = this.$route.params.id ? this.$route.params.id : this.$route.query.id
-            doconsole(userId)
+
             const response = await UserService.addEmployeeExperience(experience, userId)
             if (response) {
-                doconsole(response)
+
                 this.$emit('update')
                 this.$bvModal.hide('add-experience')
             }

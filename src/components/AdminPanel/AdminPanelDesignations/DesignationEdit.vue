@@ -25,14 +25,14 @@ export default {
     },
     methods: {
         async updateDesignation() {
-            doconsole(this.designation)
+
             var response = null
             if (this.designation.id)
                 response = await UserService.updateDesignation(this.designationToBeEdit.id, this.designationToBeEdit.designation)
             else
                 response = await UserService.addDesignation(this.designationToBeEdit.designation)
             if (response) {
-                doconsole(response)
+
                 this.$emit('update')
             }
         }

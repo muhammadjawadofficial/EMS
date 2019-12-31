@@ -15,24 +15,22 @@
                     </div>
                 </div><!-- col-sm-4 -->
                 <div class="col-sm-12 col-md-8">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-6 col-md-6" v-for="(certification, index) in userData.certifications" :key="certification.key">
-                                <div class="experience margin-b-50">
-                                    <h4 class="profile-heading-4">
-                                        <b class="profile-text-weighted">{{certification.certification}} ({{certification.empCertifications.title}})</b>
-                                        <b-button v-if="canEdit" class="float-right" @click="deleteCertification(index)" variant="danger"><i class="fas fa-trash-alt"></i></b-button>
-                                        <b-button v-if="canEdit" class="float-right mr-1" @click="editCertificationIndex = index, $bvModal.show('edit-certificate')" variant="primary"><i class="far fa-edit"></i></b-button>
-                                        <!-- <button class="btn" @click="editCertificationIndex = index" data-toggle="modal" data-target="#edit-certification">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6" v-for="(certification, index) in userData.certifications" :key="certification.key">
+                            <div class="experience margin-b-50">
+                                <h4 class="profile-heading-4">
+                                    <b class="profile-text-weighted">{{certification.certification}} ({{certification.empCertifications.title}})</b>
+                                    <b-button v-if="canEdit" class="float-right" @click="deleteCertification(index)" variant="danger"><i class="fas fa-trash-alt"></i></b-button>
+                                    <b-button v-if="canEdit" class="float-right mr-1" @click="editCertificationIndex = index, $bvModal.show('edit-certificate')" variant="primary"><i class="far fa-edit"></i></b-button>
+                                    <!-- <button class="btn" @click="editCertificationIndex = index" data-toggle="modal" data-target="#edit-certification">
                                             <i style="color:white" class="far fa-edit"></i>
                                         </button> -->
-                                    </h4>
-                                    <h5 class="profile-heading-5 font-lite-black"><b class="profile-text-weighted">{{certification.empCertifications.organization}}</b></h5>
-                                    <h6 class="profile-heading-6 margin-t-10">{{certification.empCertifications.completionDate}}</h6>
-                                    <h6 class="profile-heading-6 margin-t-10">{{certification.empCertifications.location}}</h6>
-                                </div><!-- experience -->
-                            </div><!-- col-sm-8 -->
-                        </div>
+                                </h4>
+                                <h5 class="profile-heading-5 font-lite-black"><b class="profile-text-weighted">{{certification.empCertifications.organization}}</b></h5>
+                                <h6 class="profile-heading-6 margin-t-10">{{certification.empCertifications.completionDate}}</h6>
+                                <h6 class="profile-heading-6 margin-t-10">{{certification.empCertifications.location}}</h6>
+                            </div><!-- experience -->
+                        </div><!-- col-sm-8 -->
                     </div>
                 </div>
                 <!-- <div class="experience margin-b-50">

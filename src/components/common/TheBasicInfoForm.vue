@@ -112,7 +112,7 @@ export default {
         async getGenders() {
             const response = await UserService.getGenders();
             this.selectGenders = response.data.data
-            // doconsole(this.selectGenders)
+
         },
 
         async getDesignations() {
@@ -126,7 +126,7 @@ export default {
         },
 
         async getCities(countryId) {
-            // doconsole(!countryId)
+
             if (countryId != 'null') {
                 const response = await UserService.getCities(countryId)
                 this.selectCities = response.data.data.cities
@@ -142,8 +142,8 @@ export default {
         }
     },
     mounted() {
-        doconsole('inside form')
-        doconsole(this.userData)
+
+
         this.getGenders();
         this.getCountries();
         this.getDesignations();

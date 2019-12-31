@@ -124,6 +124,7 @@ export default {
     mounted() {
         this.fillSkillChartData()
         this.fillDesignationChartData()
+        this.getTotalEmployeesCount()
     },
     methods: {
         async fillSkillChartData() {
@@ -174,6 +175,9 @@ export default {
                 }]
             }
         },
+        async getTotalEmployeesCount(){
+            
+        }
     }
 }
 </script>

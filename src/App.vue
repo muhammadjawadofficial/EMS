@@ -1,9 +1,9 @@
 <template>
 <div id="app">
 
-    <navVue v-if="checkSession()"></navVue>
+    <navVue v-if="checkToken()"></navVue>
 
-    <router-view/>
+    <router-view />
 
     <footerVue v-if="checkSession()"></footerVue>
 </div>
@@ -12,7 +12,9 @@
 <script>
 import navVue from '@/components/common/TheNavigationBar'
 import footerVue from '@/components/common/TheFooter'
-import {TokenService} from '@/services/storage.service'
+import {
+    TokenService
+} from '@/services/storage.service'
 
 export default {
     name: 'App',
@@ -21,13 +23,19 @@ export default {
         navVue
     },
     methods: {
-        checkSession() {
-            if (TokenService.getToken() && TokenService.getIsAdmin() != 'true') {
+        checkToken() {
+            if (!!TokenService.getToken()) {
+                this.$store.dispatch('SET_USER_INFO')
                 return true
-            } else {
-                return false
             }
+            return false
         },
+        checkSession() {
+            if (this.checkToken() & TokenService.getIsAdmin() != 'true') {
+                return true
+            }
+            return false
+        }
     }
 }
 </script>

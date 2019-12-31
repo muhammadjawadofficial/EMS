@@ -1,48 +1,44 @@
 <template>
-<nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color:#392bc0; padding: 0.5rem 1rem;">
-    <span style="float: center;">
-        <a @click="toProfile" class="navbar-brand"><img src="@/assets/db2.png" alt=""></a>
-    </span>
-    <!-- <span style="float: right;"><button class="btn btn-warning"></button></span> -->
-    <!-- <span style="float: right;"><button class="btn btn-danger"><i class="fa fa-users"></i><i class="fas fa-sign-out-alt"></i></button></span> -->
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <!-- Navbar links -->
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav">
-            <!-- <router-link class="nav-item" v-for="route in $router.options.routes" :key="route.path" :to="route.path">
-                 <a class="nav-link">{{ route.name }}</a>
-            </router-link> -->
-            <!-- :class="[ current === navLink.path ? 'active' : '']" -->
-            <li class="nav-item" :class="[ current === navLink.path ? 'active' : '']" v-for="navLink in navLinks" :key="navLink.id">
-                <!-- <router-link class="router-link-active" :to="navLink.path">{{navLink.name}}</router-link> -->
-                <a class="nav-link" @click="nextPath(navLink.path),current = navLink.path">{{ navLink.name }}</a>
-            </li>
-            <!-- <li class="nav-item" :class="[ current === '/pageProfile' ? 'active' : '']">
-                <a class="nav-link" @click="toProfile(), current='/pageProfile'">My Profile</a>
-            </li>
-            <li class="nav-item" :class="[ current === '/list' ? 'active' : '']">
-                <a class="nav-link" @click="toDevelopers(), current='/list'">Developers</a>
-            </li>
-            <li v-if="canAdd == 'true'" class="nav-item" :class="[ current === '/addEmployee' ? 'active' : '']">
-                <a class="nav-link" @click="toAddEmployee(), current='/addEmployee'">Add New Employee</a>
-            </li> -->
-        </ul>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <button @click="logoutt" class="btn btn-danger ml-auto mr-3"><i class="fas fa-sign-out-alt"></i> Logout</button>
-            </li>
-        </ul>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top">
+    <div class="container-fluid">
+        <button class="navbar-toggler sidebar-toggler" type="button" data-toggle="collapse" data-target="#navigationIndex" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+        </button>
+        <div class="logo" style="text-align:center">
+            <img src="@/assets/db2.png" alt="DevBatch-logo">
+        </div>
+        <div class="collapse navbar-collapse justify-content-end" id="navigationIndex">
+            <ul class="navbar-nav" v-if="$store.getters.USERROLE != 'true'">
+                <li class="nav-item" :class="[ current === navLink.path ? 'active' : '']" v-for="navLink in navLinks" :key="navLink.id">
+                    <a class="nav-link" @click="nextPath(navLink.path),current = navLink.path">{{ navLink.name }}</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <b-nav-item-dropdown right>
+                    <template v-slot:button-content>
+                        <img :src="dataUrl" height="30" alt="user-image" /><span class="text-white"> {{fullName}}</span>
+                    </template>
+                    <b-dropdown-item :to="'/admin/listEmployees/' + $store.getters.USERID">Profile</b-dropdown-item>
+                    <b-dropdown-item @click="logout()">Sign Out</b-dropdown-item>
+                </b-nav-item-dropdown>
+            </ul>
+        </div>
     </div>
 </nav>
+<!-- End Navbar -->
 </template>
 
 <script>
 import {
     TokenService
 } from '@/services/storage.service'
+import {
+    image
+} from '@/constants'
 import UserService from '@/services/user.service'
 export default {
     data() {
@@ -60,12 +56,6 @@ export default {
         else if (this.current == '/pageProfile')
             this.current = '/list'
 
-        this.canAdd = TokenService.getIsAdmin() === 'true' ? true : false;
-
-        // doconsole(this.$router.currentRoute)
-        // doconsole(this.$router.currentRoute.path)
-        // doconsole(this.current)
-        // doconsole(this.$router.options.routes)
         this.$router.options.routes.forEach(route => {
             if (route.meta)
                 if (route.meta.navigationLink) {
@@ -74,20 +64,13 @@ export default {
                             name: route.name,
                             path: this.userOwnProfilePath
                         })
-                    else if (!(route.path == '/addEmployee' && !this.canAdd))
+                    else
                         this.navLinks.push({
                             name: route.name,
                             path: route.path
                         })
                 }
-            // if (route.meta.navLink != undefined)
-            // this.navLinks.push({
-            //     name: route.name,
-            //     path: route.path
-            // })
         })
-        doconsole(this.navLinks)
-        // doconsole(this.$router.currentRoute.fullPath)
     },
     methods: {
         toProfile() {
@@ -97,51 +80,12 @@ export default {
             })
         },
         nextPath(path) {
-            // doconsole('current path:' + this.current)
-            // doconsole('clicked path: ' + path)
             if (this.$router.currentRoute.fullPath != path)
                 this.$router.replace({
                     path: path
                 })
-            // switch (path) {
-            //     case '/list':
-            //         this.toDevelopers();
-            //         break;
-            //     case '/addEmployee':
-            //         this.toAddEmployee()
-            //         break;
-            //     case '/pageProfile':
-            //         this.toProfile();
-            //         break;
-            //     default:
-            //         break;
-            // }
         },
-        // currentPath() {
-        //     return this.$router.currentRoute.path
-        // },
-        // toDevelopers() {
-        //     if (this.currentPath() != '/list')
-        //         this.$router.replace({
-        //             path: `/list`
-        //         })
-        // },
-        // toProfile() {
-        //     doconsole(this.currentPath())
-        //     if (this.currentPath() != '/pageProfile')
-        //         this.$router.replace({
-        //             path: `/pageProfile?id=${TokenService.getCurrentEmployeeId()}`
-        //         })
-        // },
-        // toAddEmployee() {
-        //     if (this.currentPath() != '/addEmployee')
-        //         this.$router.replace({
-        //             path: `/addEmployee`
-        //         })
-        // },
-        async logoutt() {
-            // if (UserService.logout())
-            //     this.nextPath('/');
+        async logout() {
             const response = await UserService.logout()
             if (response) {
                 TokenService.removeToken()
@@ -150,23 +94,24 @@ export default {
                 });
             }
         },
-    }
+    },
+    computed: {
+        dataUrl() {
+            return image.convert(this.$store.getters.USERIMAGE)
+        },
+        fullName() {
+            return this.$store.getters.USERNAME
+        },
+    },
 }
 </script>
 
 <style scoped>
 .nav-link {
-    /* color: white !important; */
     cursor: pointer;
 }
 
-/* .nav-link:hover {
-    color: lightblue !important
-} */
-
-/* .navbar-nav .active{
-    text-decoration: underline !important
-    border: #03a9f4 1px solid;
-    border-radius: 8px;
-} */
+nav {
+    background-color: #392bc0 !important;
+}
 </style>

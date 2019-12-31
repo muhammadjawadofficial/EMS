@@ -135,7 +135,7 @@ export default {
     methods: {
         async getUsers() {
             const response = await UserService.getUsersDetails()
-            doconsole(response)
+
             if (!response || !response.data.success) {
                 this.$toasted.global.error()
                 this.$router.push({
@@ -168,9 +168,9 @@ export default {
                     confirm = value
                 })
             if (confirm) {
-                doconsole(userId)
+
                 const response = await UserService.deleteEmployee(userId)
-                doconsole(response)
+
                 if (response) {
                     this.$toasted.global.success({
                         message: 'Employee Deleted Successfully!'
