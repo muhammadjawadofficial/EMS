@@ -1,7 +1,8 @@
 const TOKEN_KEY = 'token'
 const CURRENT_EMPLOYEE_ID = 'currentEmployeeId'
 const IS_ADMIN = 'isAdmin'
-
+const EMPLOYEE_IMAGE = "imageData"
+const EMPLOYEE_EMAIL = "email"
 /**
  * Manage the how Access Tokens are being stored and retreived from storage.
  *
@@ -17,7 +18,7 @@ const TokenService = {
         localStorage.setItem(TOKEN_KEY, accessToken)
     },
 
-    removeToken() {
+    clear() {
         localStorage.clear()
     },
     
@@ -36,6 +37,22 @@ const TokenService = {
     saveIsAdmin(isAdmin) {
         localStorage.setItem(IS_ADMIN, isAdmin)
     },
+
+    getEmployeeImage(){
+        return localStorage.getItem(EMPLOYEE_IMAGE)
+    },
+
+    saveEmployeeImage(image){
+        localStorage.setItem(EMPLOYEE_IMAGE, image)
+    },
+
+    getEmployeeEmail(){
+        return localStorage.getItem(EMPLOYEE_EMAIL)
+    },
+
+    saveEmployeeEmail(email){
+        localStorage.setItem(EMPLOYEE_EMAIL, email)
+    }
 }
 
 export { TokenService }

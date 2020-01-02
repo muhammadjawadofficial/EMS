@@ -99,6 +99,11 @@ export default {
                     name: ['listDesignations'],
                     icon: '<i class="fas fa-user-tag"></i>',
                     text: 'Designations'
+                },
+                {
+                    name: ['listCountry', 'editCountry'],
+                    icon: '<i class="fas fa-globe"></i>',
+                    text: 'City/Country'
                 }
                 // {
                 //     name: ['listGenders'],
@@ -108,6 +113,10 @@ export default {
             ]
         }
     },
+    mounted() {
+        doconsole('inside admin panl')
+        doconsole(this.$store.getters.USEREMAIL)
+    },
     methods: {
         current() {
             return this.$router.currentRoute.name
@@ -115,21 +124,12 @@ export default {
         async logout() {
             const response = await UserService.logout()
             if (response) {
-                TokenService.removeToken()
+                TokenService.clear()
                 this.$router.push({
                     path: '/'
                 });
             }
         },
-    },
-    async mounted() {
-
-        const response = await UserService.getUserDetails(TokenService.getCurrentEmployeeId())
-
-
-        const data = response.data.data
-        this.adminName = data.firstName + ' ' + data.lastName
-        this.adminImage = data.image.data
     },
     computed: {
         dataUrl() {

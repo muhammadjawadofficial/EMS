@@ -19,8 +19,11 @@
                     <input class="input100" v-model="loginInformation.password" type="password" placeholder="Enter password" autocomplete="current-password" required>
                     <span class="focus-input100"></span>
                 </div>
-                <div class="container-login100-form-btn">
-                    <button type="submit" class="login100-form-btn">Login</button>
+                <div class="container-login100-form-btn d-flex justify-content-end">
+                    <button v-if="isPressed" disabled class="login100-form-btn">
+                        <b-spinner></b-spinner>
+                    </button>
+                    <button v-else type="submit" class="login100-form-btn">Login</button>
                 </div>
             </form>
         </div>
@@ -44,25 +47,45 @@ export default {
                 email: null,
                 password: null
             },
-            error: ''
+            error: '',
+            isPressed: false
         }
+    },
+    mounted() {
+        if (!TokenService.getToken()) {
+            this.$store.dispatch('RESET_USER_INFO')
+        }
+        doconsole('userlogin')
+        doconsole(this.$store.getters.USERID)
     },
     methods: {
         async signIn() {
-            this.error = login.check
+            // this.error = login.check
+            this.isPressed = true
             const response = await UserService.login(this.loginInformation)
 
             if (!response) {
                 this.error = network_error
+                this.isPressed = false
             } else {
                 if (!response.data.success) {
                     this.error = login.failure
                     this.loginInformation.password = ''
+                    this.isPressed = false
                 } else {
                     this.error = login.success
                     TokenService.saveToken(response.data.token)
                     TokenService.saveCurrentEmployeeId(response.data.id)
                     TokenService.saveIsAdmin(response.data.isAdmin)
+
+                    const res = await UserService.getUserDetails(response.data.id)
+                    if (res) {
+                        const data = res.data.data
+
+                        TokenService.saveEmployeeEmail(data.employeeLogin.email)
+                        TokenService.saveEmployeeImage(data.image.data)
+                    }
+
                     this.$toasted.global.success()
                     if (response.data.isAdmin)
                         this.$router.replace({

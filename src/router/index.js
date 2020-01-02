@@ -1,42 +1,34 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+Vue.use(Router)
 
+//employee components
 import login from '@/components/UserLogin/UserLogin'
 import pageProfile from '@/components/Profile/AppProfile'
 import list from '@/components/Developers/AppDevelopers'
-// import addEmployee from '@/components/User/UserRegistration'
+
 import page404 from '@/components/common/The404'
 
-// import view from '@/components/employeeList/profile'
-// import listUsers from '@/components/listUsers'
-// import profile from '@/components/Profile'
+//admin-side components
 import adminPanel from '@/components/AdminPanel/AppAdminPanel'
-
+import adminDashboard from '@/components/AdminPanel/AdminPanelDashboard/AdminPanelDashboard'
 import employeeList from '@/components/AdminPanel/AdminPanelEmployees/EmployeeList'
 import employeeEdit from '@/components/AdminPanel/AdminPanelEmployees/EmployeeEdit'
-// import employeeAdd from '@/components/AdminPanel/AdminPanelEmployees/AddEmployee'
-
-import skillList from '@/components/AdminPanel/AdminPanelSkills/SkillList'
-
 import educationList from '@/components/AdminPanel/AdminPanelEducation/EducationList'
 import educationEdit from '@/components/AdminPanel/AdminPanelEducation/EducationEdit'
-
 import certificateList from '@/components/AdminPanel/AdminPanelCertificates/CertificateList'
-
-import genderList from '@/components/AdminPanel/AdminPanelGenders/GendersList'
-
 import designationList from '@/components/AdminPanel/AdminPanelDesignations/DesignationsList'
+import skillList from '@/components/AdminPanel/AdminPanelSkills/SkillList'
+import genderList from '@/components/AdminPanel/AdminPanelGenders/GendersList'
+import countryList from '@/components/AdminPanel/AdminPanelCityCountry/CityCountryList'
+import countryEdit from '@/components/AdminPanel/AdminPanelCityCountry/CityCountryEdit'
 
 
-import adminDashboard from '@/components/AdminPanel/AdminPanelDashboard/AdminPanelDashboard'
 import {
   TokenService
 } from '@/services/storage.service'
-Vue.use(Router)
 
 const router = new Router({
-  // mode: 'history',
-  // base: process.env.BASE_URL,
   routes: [{
       path: '/',
       name: 'login',
@@ -64,15 +56,6 @@ const router = new Router({
         navigationLink: true
       }
     },
-    // {
-    //   path: '/addEmployee',
-    //   name: 'Add New Employee',
-    //   component: addEmployee,
-    //   meta: {
-    //     onlyWhenAdmin: true,
-    //     navigationLink: true
-    //   }
-    // },
     {
       path: '/admin/',
       component: adminPanel,
@@ -127,15 +110,20 @@ const router = new Router({
           component: designationList
         },
         {
+          path: 'listCountry',
+          name: 'listCountry',
+          component: countryList
+        },
+        {
+          path: 'editCountry/:id',
+          name: 'editCountry',
+          component: countryEdit
+        },
+        {
           path: '404',
           name: 'admin404',
           component: page404
         },
-        // {
-        //   path: 'addEmployee',
-        //   name: 'addEmployee',
-        //   component: addEmployee
-        // }
       ]
     },
     {

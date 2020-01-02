@@ -3,7 +3,7 @@
     <div class="card">
         <div class="card-body">
             <b-button class="add-button" @click="addGender" variant="primary">Add Gender</b-button>
-            <b-table sort-by="id" primary-key="id" :tbody-transition-props="tableTransition" responsive striped hover :busy="busy" :items="genders" :fields="tableGendersFields">
+            <b-table sort-by="id" primary-key="id" :tbody-transition-props="tableTransition" sort-icon-left responsive striped hover :busy="busy" :items="genders" :fields="tableGendersFields">
                 <template v-slot:cell(actions)="data">
                     <a @click="genderToBeEdit = data.item"><i class="far fa-edit"></i></a>
                     <a @click="deleteGender(data.item.id)"><i class="fas fa-trash"></i></a>

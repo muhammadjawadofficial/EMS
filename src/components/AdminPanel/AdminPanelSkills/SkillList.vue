@@ -3,7 +3,7 @@
     <b-button class="add-button" @click="addSkill('new')" variant="primary">Add Skill</b-button>
     <div class="card">
         <div class="card-body">
-            <b-table sort-by="id" primary-key="id" :tbody-transition-props="tableTransition" responsive striped hover :busy="busy" :items="availableSkills" :fields="tableSkillFields">
+            <b-table sort-by="id" primary-key="id" :tbody-transition-props="tableTransition" sort-icon-left responsive striped hover :busy="busy" :items="availableSkills" :fields="tableSkillFields">
                 <template v-slot:cell(actions)="data">
                     <a @click="skillToBeEdit = data.item"><i class="far fa-edit"></i></a>
                     <a @click="deleteSkill(data.item.id)"><i class="fas fa-trash"></i></a>

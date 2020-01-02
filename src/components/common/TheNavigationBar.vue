@@ -1,4 +1,5 @@
 <template>
+<div>
 <!-- Navbar -->
 <nav class="navbar navbar-expand-md navbar-dark fixed-top">
     <div class="container-fluid">
@@ -22,17 +23,21 @@
                     <template v-slot:button-content>
                         <img :src="dataUrl" height="30" alt="user-image" /><span class="text-white"> {{fullName}}</span>
                     </template>
-                    <b-dropdown-item :to="'/admin/listEmployees/' + $store.getters.USERID">Profile</b-dropdown-item>
+                    <b-dropdown-item :to="($store.getters.USERROLE == 'true'? '/admin/listEmployees/' : '/pageProfile?id=') + $store.getters.USERID">Profile</b-dropdown-item>
+                    <b-dropdown-item @click="$bvModal.show('edit-password')">Change Password</b-dropdown-item>
                     <b-dropdown-item @click="logout()">Sign Out</b-dropdown-item>
                 </b-nav-item-dropdown>
             </ul>
         </div>
     </div>
 </nav>
+    <ChangePasswordModal v-if="$store.getters.USEREMAIL" />
+</div>
 <!-- End Navbar -->
 </template>
 
 <script>
+import ChangePasswordModal from './TheChangePasswordModal'
 import {
     TokenService
 } from '@/services/storage.service'
@@ -48,6 +53,9 @@ export default {
             navLinks: [],
             userOwnProfilePath: `/pageProfile?id=${TokenService.getCurrentEmployeeId()}`
         }
+    },
+    components: {
+        ChangePasswordModal
     },
     mounted() {
         this.current = this.$router.currentRoute.path
@@ -88,12 +96,15 @@ export default {
         async logout() {
             const response = await UserService.logout()
             if (response) {
-                TokenService.removeToken()
+                TokenService.clear()
                 this.$router.push({
                     path: '/'
                 });
             }
         },
+        changePassword(){
+            doconsole('change password')
+        }
     },
     computed: {
         dataUrl() {

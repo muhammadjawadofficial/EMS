@@ -3880,8 +3880,8 @@ tbody.collapse.show {
 
 .custom-control-label::before {
   position: absolute;
-  top: 0.25rem;
-  left: 0;
+  top: 0;
+  /* left: 0; */
   display: block;
   width: 1rem;
   height: 1rem;
@@ -3894,8 +3894,8 @@ tbody.collapse.show {
 
 .custom-control-label::after {
   position: absolute;
-  top: 0.25rem;
-  left: 0;
+  top: 0;
+  /* left: 0; */
   display: block;
   width: 1rem;
   height: 1rem;
@@ -14692,11 +14692,6 @@ table .flip-list-move {
 
 .text-indent {
     text-indent: 10px;
-}
-
-.table.b-table>thead>tr>[aria-sort]:not(.b-table-sort-icon-left),
-.table.b-table>tfoot>tr>[aria-sort]:not(.b-table-sort-icon-left) {
-    background-position: left calc(0.75rem / 2) center !important;
 }
 
 .table.b-table>thead>tr>th {

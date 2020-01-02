@@ -6,7 +6,7 @@
     
     <div class="card">
         <div class="card-body">
-            <b-table  v-if="skills.length" striped hover :items="skills" :fields="fields"></b-table>
+            <b-table  v-if="skills.length" striped hover :items="skills" :fields="fields" sort-icon-left></b-table>
             <h3 v-else>No skills found against this employee</h3>
         </div>
     </div>

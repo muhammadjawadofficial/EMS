@@ -82,17 +82,12 @@ export default {
     mounted() {
         this.getUserInfo()
     },
-    computed: {
-        UserInfo() {
-            this.getUserInfo()
-        }
-    },
     methods: {
         async getUserInfo() {
             const response = await UserService.getUserDetails(this.$route.params.id)
             if (response) {
                 this.userInfo = response.data.data
-
+                doconsole(this.userInfo)
                 
                 if (this.$store.getters.USERID == this.$route.params.id)
                     this.$store.dispatch('SET_USER_INFO')

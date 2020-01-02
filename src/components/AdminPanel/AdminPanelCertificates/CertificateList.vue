@@ -3,7 +3,7 @@
     <b-button class="add-button" @click="addCertificate" variant="primary">Add Certificate</b-button>
     <div class="card">
         <div class="card-body">
-            <b-table primary-key="id" sort-by="id" :tbody-transition-props="tableTransition" responsive striped hover :busy="busy" :items="availableCertificates" :fields="tableCertficatesFields">
+            <b-table primary-key="id" sort-by="id" :tbody-transition-props="tableTransition" sort-icon-left responsive striped hover :busy="busy" :items="availableCertificates" :fields="tableCertficatesFields">
                 <template v-slot:cell(actions)="data">
                     <a @click="toBeEdit = data.item"><i class="far fa-edit"></i></a>
                     <a @click="deleteCertificate(data.item.id)"><i class="fas fa-trash"></i></a>

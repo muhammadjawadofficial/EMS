@@ -1,32 +1,33 @@
 <template>
-<!-- <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12"> -->
-<!-- <b-button @click="busy = !busy">Toggle Busy State</b-button> -->
 <div>
     <b-button class="add-button" v-b-modal.add-employee variant="primary">Add Employee</b-button>
+    <!-- <b-button class="add-button" @click="showSearch = !showSearch"><i class="fas fa-search"></i></b-button> -->
     <div class="card">
         <div class="card-body">
-            <b-table sort-by="id" primary-key="id" responsive striped hover :tbody-transition-props="tableTransition" :busy="busy" :items="usersList" :fields="tableFields">
-                <template v-slot:cell(id)="data">
-                    {{ data.item.id }}
-                </template>
+            <b-row class="justify-content-end">
+                <b-col lg="8" v-if="showSearch">
+                    <b-form-group description="Leave all unchecked to filter on all data" class="mb-0 text-center">
+                        <b-form-checkbox-group v-model="filterOn" class="row px-3">
+                            <b-form-checkbox class="col" value="id">ID</b-form-checkbox>
+                            <b-form-checkbox class="col" value="firstName">Name</b-form-checkbox>
+                            <b-form-checkbox class="col" value="designation">Designation</b-form-checkbox>
+                            <b-form-checkbox class="col" value="gender">Gender</b-form-checkbox>
+                            <b-form-checkbox class="col" value="contactNumber">Mobile</b-form-checkbox>
+                        </b-form-checkbox-group>
+                    </b-form-group>
+                </b-col>
+                <b-col lg="4" class="float-right p-0">
+                    <b-input-group>
+                        <b-input-group-append>
+                            <span class="input-group-text"><a @click="showSearch = !showSearch" style="cursor:pointer"><i class="fas fa-filter ml-2"></i></a><i class="fas fa-search ml-2"></i></span>
+                        </b-input-group-append>
+                        <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search">
+                        </b-form-input>
+                    </b-input-group>
+                </b-col>
+            </b-row>
 
-                <template v-slot:cell(firstName)="data">
-                    {{ data.item.firstName  }}
-                </template>
-
-                <template v-slot:cell(designation)="data">
-                    {{ data.item.designation && data.item.designation.designation || 'N/A'}}
-                </template>
-
-                <template v-slot:cell(gender)="data">
-                    {{ data.item.gender && data.item.gender.gender || 'N/A'}}
-                </template>
-
-                <template v-slot:cell(contactNumber)="data">
-                    {{ data.item.contactNumber || 'N/A'}}
-                </template>
+            <b-table sort-by="id" :filter="filter" :filterIncludedFields="filterOn" @filtered="onFiltered" :current-page="currentPage" :per-page="perPage" primary-key="id" sort-icon-left responsive striped hover :tbody-transition-props="tableTransition" :busy="busy" :items="usersList" :fields="tableFields">
 
                 <template v-slot:cell(actions)="data">
                     <a @click="editUser(data.item.id)"><i class="far fa-edit"></i></a>
@@ -39,49 +40,23 @@
                         <strong>Loading...</strong>
                     </div>
                 </template>
+
             </b-table>
+            <b-row>
+                <b-col sm="5" md="2" class="my-auto">
+                    <b-form-select v-model="perPage" id="perPageSelect" size="sm" :options="pageOptions"></b-form-select>
+                </b-col>
+                <b-col sm="7" md="4" class="my-auto">
+                    Showing {{perPage}} out of {{usersList.length}} records
+                </b-col>
+                <b-col sm="12" md="6">
+                    <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage" align="fill" class="mt-1"></b-pagination>
+                </b-col>
+            </b-row>
         </div>
     </div>
     <AddEmployee @update="getUsers" />
 </div>
-
-<!-- <table class="table table-striped table-responsive-sm table-hover table-fixed-layout">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Designation</th>
-                        <th>Gender</th>
-                        <th>Mobile</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="(user, index) in usersList" :key="index">
-                        <td>
-                            {{index + 1}}
-                        </td>
-                        <td>
-                            {{user.firstName}} {{user.lastName}}
-                        </td>
-                        <td>
-                            {{(user.designation === "" || user.designation === null) ? 'N/A' : user.designation}}
-                        </td>
-                        <td>
-                            {{(user.gender === "" || user.gender === null) ? 'N/A' : user.gender.gender}}
-                        </td>
-                        <td>
-                            {{(user.contactNumber === "" || user.contactNumber === null) ? 'N/A' : user.contactNumber}}
-                        </td>
-                        <td>
-                            <a @click="editUser(user.id)"><i class="material-icons">edit</i></a>
-                            <a @click="deleteUser(user.id)"><i class="material-icons">delete</i></a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table> -->
-<!-- </div>
-    </div> -->
 </template>
 
 <script>
@@ -96,31 +71,34 @@ export default {
     },
     data() {
         return {
+            filter: null,
+            filterOn: [],
+            totalRows: 1,
+            currentPage: 1,
+            perPage: 9,
+            pageOptions: [5, 9, 10, 15],
             tableTransition: adminPanelTableTransition,
             usersList: [],
             busy: true,
+            showSearch: false,
             tableFields: [{
                 key: 'id',
                 label: '#',
-                'class': 'text-center width10 text-indent',
+                'class': 'text-center width10',
                 sortable: true
             }, {
                 label: 'Name',
-                key: 'firstName',
-                'class': 'text-indent',
+                key: 'name',
                 sortable: true
             }, {
                 key: 'designation',
-                'class': 'text-indent',
                 sortable: true
             }, {
                 key: 'gender',
-                'class': 'text-indent',
                 sortable: true
             }, {
                 label: 'Mobile',
                 key: 'contactNumber',
-                'class': 'text-indent',
                 sortable: true
             }, {
                 lable: 'Actions',
@@ -136,14 +114,18 @@ export default {
         async getUsers() {
             const response = await UserService.getUsersDetails()
 
-            if (!response || !response.data.success) {
-                this.$toasted.global.error()
-                this.$router.push({
-                    name: 'admin404'
-                })
-            } else {
+            if (response) {
                 this.busy = false
-                this.usersList = response.data.data
+                response.data.data.forEach(item => {
+                    this.usersList.push({
+                        id: item.id,
+                        name: item.firstName + ' ' + item.lastName,
+                        designation: item.designation && item.designation.designation || 'N/A',
+                        gender: item.gender && item.gender.gender || 'N/A',
+                        contactNumber: item.contactNumber || 'N/A'
+                    })
+                })
+                this.totalRows = this.usersList.length
             }
         },
         editUser(userId) {
@@ -180,9 +162,10 @@ export default {
                 confirm = false
             }
         },
-
-        addNewEmployee() {
-
+        onFiltered(filteredItems) {
+            // Trigger pagination to update the number of buttons/pages due to filtering
+            this.totalRows = filteredItems.length
+            this.currentPage = 1
         }
     }
 }

@@ -13,7 +13,7 @@ import 'bootstrap/dist/js/bootstrap.bundle'
 import './toast'
 
 import customConsole from './console'
-
+window.doconsole = customConsole.log
 
 import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue)

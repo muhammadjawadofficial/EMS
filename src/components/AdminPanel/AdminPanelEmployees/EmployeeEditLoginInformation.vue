@@ -33,13 +33,11 @@ export default {
     },
     methods: {
         async updateLoginInformation(loginInformation) {
-
             const response = await UserService.updateCredentials(loginInformation, this.$route.params.id)
             if (response) {
                 loginInformation.currentPassword = ''
                 loginInformation.password = ''
             }
-
         }
     },
 }

@@ -30,7 +30,7 @@
                         <span v-if="canEdit">
                             <!-- <button class="btn btn-primary"><i class="fas fa-plus"></i></button> -->
                             <!-- <button @click="editIntroduction = true" class="btn btn-warning" data-toggle="modal" data-target="#edit-about"><i class="far fa-edit"></i> Personal Information</button> -->
-                            <b-button variant="success" v-b-modal.edit-about><i class="far fa-edit"></i> Personal Information</b-button>
+                            <b-button variant="primary" v-b-modal.edit-about><i class="far fa-edit"></i> Personal Information</b-button>
                             <!-- <button v-if="canEdit" class="btn btn-warning" @click="showModal('edit-about')"><i class="far fa-edit"></i> Personal Information</button> -->
                         </span>
                         <!-- <ul class="profile-ul social-icons">

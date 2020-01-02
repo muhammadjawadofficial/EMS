@@ -3,7 +3,7 @@
 
     <navVue v-if="checkToken()"></navVue>
 
-    <router-view />
+    <router-view/>
 
     <footerVue v-if="checkSession()"></footerVue>
 </div>
@@ -26,12 +26,13 @@ export default {
         checkToken() {
             if (!!TokenService.getToken()) {
                 this.$store.dispatch('SET_USER_INFO')
+                doconsole('store set')
                 return true
             }
             return false
         },
         checkSession() {
-            if (this.checkToken() & TokenService.getIsAdmin() != 'true') {
+            if (!!TokenService.getToken() & TokenService.getIsAdmin() != 'true') {
                 return true
             }
             return false

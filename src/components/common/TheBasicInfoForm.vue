@@ -126,7 +126,6 @@ export default {
         },
 
         async getCities(countryId) {
-
             if (countryId != 'null') {
                 const response = await UserService.getCities(countryId)
                 this.selectCities = response.data.data.cities

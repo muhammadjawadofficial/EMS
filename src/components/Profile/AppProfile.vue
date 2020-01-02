@@ -75,7 +75,6 @@ export default {
         }
     },
     mounted() {
-
         this.getUser();
         this.showEditButtons()
         window.scrollTo(0, document.getElementById("page-top").offsetTop);

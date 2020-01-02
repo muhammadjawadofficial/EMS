@@ -99,6 +99,7 @@ const UserService = {
     return await ApiService.get(`employee/getEmployees?page=${pageNumber}&pageSize=${pageSize}`)
   },
   async updateCredentials(credentials, userId) {
+    doconsole(credentials)
     return await ApiService.patch(`employee/${userId}/updateLoginCredentials`, credentials)
   },
   async updateDegree(degreeLevelDetails) {
@@ -182,6 +183,18 @@ const UserService = {
   },
   async deleteDesignation(designationId) {
     return await ApiService.delete(`designation/deleteDesignation/${designationId}`)
+  },
+  async addCountryWithCities(countryWithCities){
+    return await ApiService.post(`country/addCities`, countryWithCities)
+  },
+  async updateCountry(countryObject){
+    return await ApiService.patch(`country/updateCountry/${countryObject.id}`, countryObject)
+  },
+  async deleteCountry(countryId){
+    return await ApiService.delete(`country/deleteCountry/${countryId}`)
+  },
+  async addACityToExistingCountry(cityObject){
+    return await ApiService.post(`city/addCity`, cityObject)
   }
 }
 export default UserService
