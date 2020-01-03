@@ -15,7 +15,7 @@
                     </div>
                 </div><!-- col-sm-4 -->
                 <div class="col-sm-12 col-md-8">
-                    <div class="row">
+                    <div class="row" v-if="userData.certifications.length">
                         <div class="col-sm-6 col-md-6" v-for="(certification, index) in userData.certifications" :key="certification.key">
                             <div class="experience margin-b-50">
                                 <h4 class="profile-heading-4">
@@ -30,7 +30,11 @@
                                 <h6 class="profile-heading-6 margin-t-10">{{certification.empCertifications.completionDate}}</h6>
                                 <h6 class="profile-heading-6 margin-t-10">{{certification.empCertifications.location}}</h6>
                             </div><!-- experience -->
+
                         </div><!-- col-sm-8 -->
+                    </div>
+                    <div class="my-4" v-else>
+                        This user doesn't have any certification record yet.
                     </div>
                 </div>
                 <!-- <div class="experience margin-b-50">

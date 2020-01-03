@@ -5,8 +5,8 @@
     <div class="card">
         <div class="card-body">
             <b-row class="justify-content-end">
-                <b-col lg="8" v-if="showSearch">
-                    <b-form-group description="Leave all unchecked to filter on all data" class="mb-0 text-center">
+                <!-- <b-col lg="8" v-if="showSearch">
+                    <b-form-group class="mb-0 text-center">
                         <b-form-checkbox-group v-model="filterOn" class="row px-3">
                             <b-form-checkbox class="col" value="id">ID</b-form-checkbox>
                             <b-form-checkbox class="col" value="firstName">Name</b-form-checkbox>
@@ -15,11 +15,12 @@
                             <b-form-checkbox class="col" value="contactNumber">Mobile</b-form-checkbox>
                         </b-form-checkbox-group>
                     </b-form-group>
-                </b-col>
+                </b-col> -->
                 <b-col lg="4" class="float-right p-0">
                     <b-input-group>
                         <b-input-group-append>
-                            <span class="input-group-text"><a @click="showSearch = !showSearch" style="cursor:pointer"><i class="fas fa-filter ml-2"></i></a><i class="fas fa-search ml-2"></i></span>
+                            <!-- <i @click="showSearch = !showSearch" style="cursor:pointer"><i class="fas fa-filter ml-2"></i></a> -->
+                            <span class="input-group-text"><i class="fas fa-search ml-2"></i></span>
                         </b-input-group-append>
                         <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search">
                         </b-form-input>
@@ -76,7 +77,7 @@ export default {
             totalRows: 1,
             currentPage: 1,
             perPage: 9,
-            pageOptions: [5, 9, 10, 15],
+            pageOptions: [5, 6, 7, 8, 9, 10, 15],
             tableTransition: adminPanelTableTransition,
             usersList: [],
             busy: true,
@@ -116,6 +117,7 @@ export default {
 
             if (response) {
                 this.busy = false
+                this.usersList = []
                 response.data.data.forEach(item => {
                     this.usersList.push({
                         id: item.id,
@@ -172,39 +174,4 @@ export default {
 </script>
 
 <style>
-/* .table-fixed-layout {
-    table-layout: fixed;
-    width: 100%;
-    white-space: nowrap;
-}
-
-.table-fixed-layout td {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.row-id {
-    width: 5%
-}
-
-.row-name {
-    width: 30%
-}
-
-.row-designation {
-    width: 30%
-}
-
-.row-gender {
-    width: 10%
-}
-
-.row-contact-number {
-    width: 15%
-}
-
-.row-actions {
-    width: 10%
-} */
 </style>

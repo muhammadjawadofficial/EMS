@@ -12,7 +12,7 @@
                     <div class="col-6">
                         <Progress :radius="50" strokeColor="#392bc0" :strokeWidth="12" value="100">
                             <template v-slot:default>
-                                <countTo :startVal='startVal' :endVal='endVal' :duration='3000'></countTo>
+                                <countTo :startVal='startVal' :endVal='totalEmployees' :duration='3000'></countTo>
                             </template>
                         </Progress>
                     </div>
@@ -30,7 +30,7 @@
                     <div class="col-6">
                         <Progress :radius="50" strokeColor="#392bc0" :strokeWidth="12" value="100">
                             <template v-slot:default>
-                                <countTo :startVal='startVal' :endVal='endVal' :duration='3000'></countTo>
+                                <countTo :startVal='startVal' :endVal='totalEmployees' :duration='3000'></countTo>
                             </template>
                         </Progress>
                     </div>
@@ -48,7 +48,7 @@
                     <div class="col-6">
                         <Progress :radius="50" strokeColor="#392bc0" :strokeWidth="12" value="100">
                             <template v-slot:default>
-                                <countTo :startVal='startVal' :endVal='endVal' :duration='3000'></countTo>
+                                <countTo :startVal='startVal' :endVal='totalEmployees' :duration='3000'></countTo>
                             </template>
                         </Progress>
                     </div>
@@ -95,7 +95,7 @@ export default {
             dataDesignationCollection: null,
             countValue: 10,
             startVal: 0,
-            endVal: 2017,
+            totalEmployees: 0,
             options: {
                 scales: {
                     yAxes: [{
@@ -175,8 +175,10 @@ export default {
                 }]
             }
         },
-        async getTotalEmployeesCount(){
-            
+        async getTotalEmployeesCount() {
+            const response = await UserService.getUsersDetailsPaginated(0, 0)
+            if (response)
+                this.totalEmployees = response.data.data.count
         }
     }
 }

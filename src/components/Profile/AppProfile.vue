@@ -68,7 +68,7 @@ export default {
     watch: {
         $route(to, from) {
             if (to.query.id != from.query.id) {
-                this.userData.id = to.query.id;
+                this.userData.id = this.$route.query.id;
                 this.getUser();
             }
             this.showEditButtons()

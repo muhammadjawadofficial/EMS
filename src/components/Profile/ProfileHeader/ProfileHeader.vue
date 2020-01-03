@@ -18,12 +18,12 @@
                         <i class="icon fas fa-phone-alt"></i>
                         <div class="right-area">
                             <h5 class="profile-heading-5">{{userData.contactNumber}}</h5>
-                            <h6 class="profile-heading-6">MIN - FRI,8AM - 7PM</h6>
+                            <h6 class="profile-heading-6">MON - FRI, 8AM - 7PM</h6>
                         </div><!-- right-area -->
                     </div><!-- info -->
                 </div><!-- col-sm-4 -->
 
-                <div class="col-sm-6 col-md-6 col-lg-4">
+                <div class="col-sm-6 col-md-6 col-lg-4 pr-0">
                     <div class="info">
                         <i class="icon fas fa-at"></i>
                         <div class="right-area">

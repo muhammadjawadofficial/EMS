@@ -11,7 +11,7 @@
                     <p v-if="user.image"><img :src="dataUrl" class="img-fluid" alt="N/A"></p>
                     <!-- <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></p> -->
                     <h4 class="card-title">{{user.firstName}} {{user.lastName}}</h4>
-                    <p v-if="user.description" class="card-text"> {{user.description | truncate(150, '...')}}</p>
+                    <p v-if="user.description" class="card-text text-justify"> {{user.description | truncate(150, '...')}}</p>
                     <!-- <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a> -->
                 </div>
             </div>
@@ -23,7 +23,7 @@
             <div class="card">
                 <div class="card-body text-center mt-4">
                     <h4 class="card-title">{{user.firstName}} {{user.lastName}}</h4>
-                    <p class="card-text"  v-if="user.description">
+                    <p class="card-text text-justify"  v-if="user.description">
                         <!-- 
                             only displaying 150 characters of developer discription.
                             Truncating rest of the description

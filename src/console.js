@@ -1,6 +1,6 @@
 const customConsole = {
     log(x){
-        if(process.env.NODE_ENV == 'development')
+        if(true)
             console.log(x)
     }
 }

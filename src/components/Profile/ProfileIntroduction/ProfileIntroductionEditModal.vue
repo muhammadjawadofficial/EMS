@@ -26,6 +26,7 @@ export default {
         async edit(updatedInformation) {
             const response = await UserService.editProfile(updatedInformation, this.$route.query.id)
             if (response) {
+                this.$store.dispatch('SET_USER_INFO')
                 this.$emit('update')
                 this.$bvModal.hide('edit-about')
             }
@@ -33,6 +34,11 @@ export default {
     },
     mounted() {
         this.updatedInformation = basicInfo.set(this.userData)
-    }
+    },
+    watch: {
+        userData(){
+            this.updatedInformation = basicInfo.set(this.userData)
+        }
+    },
 }
 </script>

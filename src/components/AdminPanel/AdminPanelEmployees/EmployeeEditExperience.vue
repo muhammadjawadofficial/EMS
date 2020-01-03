@@ -10,7 +10,7 @@
         </div>
     </div>
     <div v-for="(experience, index) in experiences" :key="index">
-        <TheExperienceForm :experience="experience" styleAs="admin" @return="editExperience" @delete="deleteExperience(index)" />
+        <TheExperienceForm :experience="experience" styleAs="admin" :experienceId="experience.id" @return="editExperience" @delete="deleteExperience(index)" />
     </div>
     <ProfileExperienceAddModal @update="$emit('update')" />
 </div>
@@ -34,7 +34,6 @@ export default {
             }
         },
         async deleteExperience(experienceIndex) {
-
             const response = await UserService.deleteEmployeeExperience(this.$route.params.id, this.experiences[experienceIndex].id)
             if (response)
                 this.$emit('update')

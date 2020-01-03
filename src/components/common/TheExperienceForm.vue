@@ -1,7 +1,7 @@
 <template>
 <div :class="styleAdmin? 'card' : ''">
     <div :class="styleAdmin? 'card-body' : ''">
-        <form @submit.prevent="$emit('return', newExperience)">
+        <form @submit.prevent="$emit('return', newExperience, experienceId)">
             <legend v-if="degreeName">{{degreeName}}</legend>
             <div class="row">
                 <div :class="styleAdmin ? 'col-md-3 col-sm-6' : 'col-md-6'">
@@ -36,8 +36,7 @@
                 </div>
             </div>
             <div :class="styleAdmin? 'add-button': 'modal-footer'">
-                <!-- <button type="reset" v-if="degreeIndex<0 && styleAdmin" class="btn">Cancel</button>
-                    <button @click.prevent="$emit('delete', degreeIndex)" v-if="degreeIndex>=0 && styleAdmin" class="btn btn-danger">Delete</button> -->
+                <button @click.prevent="$emit('delete')" class="btn btn-danger">Delete</button>
                 <button v-if="experience.company" type="submit" class="btn btn-primary">Update</button>
                 <button v-else type="submit" class="btn btn-primary">Save</button>
                 <!-- <button v-else type="submit" class="btn btn-primary">Update</button> -->
@@ -53,7 +52,7 @@ import {
     experience
 } from '@/constants'
 export default {
-    props: ['experience', 'degreeName', 'styleAs'],
+    props: ['experience', 'degreeName', 'styleAs', 'experienceId'],
     data() {
         return {
             newExperience: experience.get(),

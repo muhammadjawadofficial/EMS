@@ -9,8 +9,7 @@
                 </div>
             </div><!-- col-sm-4 -->
             <div class="col-sm-8">
-                <p class="profile-paragraph margin-b-50">{{userData.description}}</p>
-
+                <p class="profile-paragraph margin-b-50 text-justify">{{userData.description? userData.description: "This user doesn't have any about me information."}}</p>
             </div><!-- col-sm-8 -->
         </div><!-- row -->
     </div><!-- container -->

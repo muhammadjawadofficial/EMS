@@ -13,19 +13,19 @@
                 <div v-if="!colStyle" :class="colStyle ? 'col-md-6 col-sm-6' : 'col-md-6'">
                     <div class="form-group">
                         <label :class="isPasswordCorrect?'text-danger':''">Current Password{{isPasswordCorrect?' *':''}}</label>
-                        <input v-model="newLoginInformation.currentPassword" type="password" class="form-control" autocomplete="new-password" />
+                        <input v-model="newLoginInformation.currentPassword" type="password" class="form-control" autocomplete="current-password" />
                     </div>
                 </div>
                 <div :class="colStyle ? 'col-md-6 col-sm-6' : 'col-md-6'">
                     <div class="form-group">
                         <label :class="isPasswordMatched?'text-danger':''">New Password{{isPasswordMatched?' *':''}}</label>
-                        <input v-model="newLoginInformation.password" type="password" class="form-control" autocomplete="current-password" />
+                        <input v-model="newLoginInformation.password" type="password" class="form-control" autocomplete="new-password" />
                     </div>
                 </div>
                 <div v-if="!colStyle" :class="colStyle ? 'col-md-6 col-sm-6' : 'col-md-6'">
                     <div class="form-group">
                         <label :class="isPasswordMatched?'text-danger':''">Retype New Password{{isPasswordMatched?' *':''}}</label>
-                        <input v-model="newLoginInformation.reTypePassword" type="password" class="form-control" autocomplete="current-password" />
+                        <input v-model="newLoginInformation.reTypePassword" type="password" class="form-control" autocomplete="new-password" />
                     </div>
                 </div>
             </div>

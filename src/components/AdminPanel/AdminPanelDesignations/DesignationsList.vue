@@ -1,8 +1,8 @@
 <template>
 <div>
+    <b-button class="add-button" @click="addDesignation" variant="primary">Add Designation</b-button>
     <div class="card">
         <div class="card-body">
-            <b-button class="add-button" @click="addDesignation" variant="primary">Add Designation</b-button>
             <b-table sort-by="id" primary-key="id" :tbody-transition-props="tableTransition" sort-icon-left responsive striped hover :busy="busy" :items="designations" :fields="tableDesignationsFields">
                 <template v-slot:cell(actions)="data">
                     <a @click="designationToBeEdit = data.item"><i class="far fa-edit"></i></a>
@@ -78,10 +78,12 @@ export default {
                 designation: null,
             }
         },
-        async deleteDesignation(designationId){
+        async deleteDesignation(designationId) {
             const response = await UserService.deleteDesignation(designationId)
-            if(response){
-                this.$toasted.global.success({message: 'Designation deleted successfully!!'})
+            if (response) {
+                this.$toasted.global.success({
+                    message: 'Designation deleted successfully!!'
+                })
                 this.getDesignations()
             }
         }

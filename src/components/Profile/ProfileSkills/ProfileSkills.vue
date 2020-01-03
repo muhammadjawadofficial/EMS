@@ -16,10 +16,13 @@
                 </div>
             </div><!-- col-sm-4 -->
             <div class="col-sm-8">
-                <div class="profile-paragraph margin-b-50">
+                <div class="profile-paragraph margin-b-50" v-if="userData.skills.length">
                     <li class="profile-skill list-inline-item color-purple" v-for="(skill) in userData.skills" :key="skill.id">
                         {{skill.skill}}
                     </li>
+                </div>
+                <div class="my-4" v-else>
+                    This user doesn't have any skills yet.
                 </div>
             </div><!-- col-sm-8 -->
         </div><!-- row -->
@@ -49,7 +52,7 @@ export default {
     margin: 4px;
 }
 
-.color-purple{
+.color-purple {
     color: #1d5fcb
 }
 </style>

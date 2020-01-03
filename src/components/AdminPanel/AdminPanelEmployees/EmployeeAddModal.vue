@@ -67,7 +67,7 @@ export default {
                 email: '',
                 password: '',
                 designationId: '',
-                isAdmin: 0,
+                isAdmin: '0',
             },
             availableDesignations: []
         }
@@ -82,11 +82,15 @@ export default {
             this.availableDesignations = response.data.data
         },
         async onSubmit() {
-
             const response = await UserService.registerEmployee(this.form)
 
             if(response){
                 this.$toasted.global.success({message: 'Employee Successfully Created'})
+                this.form.firstName = ''
+                this.form.lastName = ''
+                this.form.email = ''
+                this.form.password = ''
+                this.form.designationId = ''
                 this.$bvModal.hide('add-employee')
                 this.$emit('update')
             }

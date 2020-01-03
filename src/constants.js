@@ -131,7 +131,7 @@ const basicInfo = {
       cityId: null,
       countryId: null,
       description: '',
-      designation: ''
+      designationId: ''
     }
   },
 
@@ -146,7 +146,7 @@ const basicInfo = {
       cityId: basicInfo.cityId,
       countryId: basicInfo.countryId,
       description: basicInfo.description,
-      designation: basicInfo.designation
+      designationId: basicInfo.designationId
     }
   }
 }

@@ -45,7 +45,7 @@
             </div><!-- row -->
         </div><!-- container -->
     </section><!-- intro-section -->
-    <ProfileIntroductionEdit :userData="userData" @update="$emit('update')" />
+    <ProfileIntroductionEdit v-if="canEdit" :userData="userData" @update="$emit('update')" />
 </div>
 </template>
 

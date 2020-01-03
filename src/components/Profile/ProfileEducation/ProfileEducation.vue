@@ -15,7 +15,7 @@
                     </div>
                 </div><!-- col-sm-4 -->
                 <div class="col-sm-8">
-                    <div class="education-wrapper">
+                    <div class="education-wrapper" v-if="userData.degrees.length">
                         <div class="education margin-b-50" v-for="(education, index) in userData.degrees" :key="education.id">
                             <b-button class="float-right" v-if="canEdit" @click="deleteEducation(index)" variant="outline-danger"><i class="fas fa-trash-alt"></i></b-button>
                             <b-button class="float-right mr-1" v-if="canEdit" @click="editEducationIndex = index, $bvModal.show('edit-education')" variant="outline-primary"><i class="far fa-edit"></i></b-button>
@@ -25,6 +25,10 @@
                             <h6 class="profile-heading-6 font-lite-black margin-t-10">SESSION {{getYear(education.empDegree.startYear)}} - {{getYear(education.empDegree.endYear)}} with {{education.empDegree.percentage}}% Marks, CGPA: {{education.empDegree.cgpa}}</h6>
                         </div><!-- education -->
                     </div><!-- education-wrapper -->
+                    
+                    <div class="my-4" v-else>
+                        This user doesn't have any education record yet.
+                    </div>
                 </div><!-- col-sm-8 -->
             </div><!-- row -->
         </div><!-- container -->

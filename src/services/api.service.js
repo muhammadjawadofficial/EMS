@@ -13,6 +13,7 @@ Vue.use(toasted)
 const server = process.env.NODE_SERVER
 
 function errorCheck(error) {
+  doconsole(error)
   doconsole(error.response)
   if(error.response)
   {

@@ -169,6 +169,7 @@ const UserService = {
     return await ApiService.delete(`employee/${userId}/deleteCertificate/${certificationId}`)
   },
   async deleteEmployeeExperience(userId, experienceId) {
+    doconsole(userId + ' ' + experienceId)
     return await ApiService.delete(`employee/${userId}/deleteWorkExperience/${experienceId}`)
   },
   async addDesignation(designation) {
