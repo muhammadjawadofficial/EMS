@@ -12,6 +12,19 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'bootstrap/dist/js/bootstrap.bundle'
 import './toast'
 
+import moment from 'moment'
+Vue.filter('formatDate', function(value) {
+  if (value) {
+    return moment(String(value)).format('DD MMM YYYY')
+  }
+});
+
+Vue.filter('formatYear', function(value) {
+  if (value) {
+    return moment(String(value)).format('YYYY')
+  }
+});
+
 import customConsole from './console'
 window.doconsole = customConsole.log
 

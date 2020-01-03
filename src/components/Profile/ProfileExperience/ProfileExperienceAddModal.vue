@@ -25,7 +25,12 @@ export default {
         TheExperienceForm
     },
     methods: {
-        async addExperience(experience) {
+        async addExperience(experience, currentlyWorking) {
+            if(currentlyWorking){
+                doconsole('null endyear')
+                experience.endYear = experience.startYear
+            }
+
             let userId = this.$route.params.id ? this.$route.params.id : this.$route.query.id
 
             const response = await UserService.addEmployeeExperience(experience, userId)

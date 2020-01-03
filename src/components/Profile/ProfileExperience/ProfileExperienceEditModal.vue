@@ -23,8 +23,11 @@ export default {
         TheExperienceForm
     },
     methods: {
-        async editExperience(experience) {
-
+        async editExperience(experience, currentlyWorking) {
+            if(currentlyWorking){
+                doconsole('null endyear')
+                experience.endYear = experience.startYear
+            }
             const response = await UserService.editEmployeeExperience(experience, this.$route.query.id, this.userData.empWorkExperiences[this.editExperienceIndex].id)
             if (response) {
                 this.$emit('update')

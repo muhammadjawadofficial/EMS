@@ -23,7 +23,7 @@
                             <!-- <b-button class="float-right" v-if="canEdit" @click="editExperienceIndex = index, $bvModal.show('edit-experience')" variant="light"><i class="far fa-edit"></i></b-button> -->
                             <h4 class="profile-heading-4"><b class="profile-text-weighted">{{experience.designation}}</b></h4>
                             <h5 class="profile-heading-5 font-lite-black"><b class="profile-text-weighted">{{experience.company}}</b></h5>
-                            <h6 class="profile-heading-6 margin-t-10">{{experience.startYear}} - {{experience.endYear}}</h6>
+                            <h6 class="profile-heading-6 margin-t-10">{{getDate(experience.startYear)}} - {{experience.endYear == experience.startYear ? 'Currently Working': getDate(experience.endYear)}}</h6>
                             <p class="profile-paragraph font-semi-white margin-tb-30 text-justify">{{experience.jobDescription}}</p>
                             <!-- <ul class="profile-ul list margin-b-30">
                             <li class="profile-li">Duis non volutpat arcu, eu mollis tellus.</li>
@@ -63,6 +63,18 @@ export default {
     methods: {
         getYear(date) {
             return new Date(date).getFullYear()
+        },
+        getDate(date) {
+            var months = ["Jan", "Feb", "Mar",
+                "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep",
+                "Oct", "Nov", "Dec"
+            ];
+            var uDate = new Date(date)
+            var day = uDate.getDate();
+            var month_index = uDate.getMonth();
+            var year = uDate.getFullYear();
+            return "" + day + " " + months[month_index] + " " + year;
         },
         async deleteExperience(index) {
             await this.$bvModal.msgBoxConfirm('Please confirm that you want to delete this work experience', {

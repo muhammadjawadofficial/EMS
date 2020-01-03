@@ -27,7 +27,11 @@ export default {
         ProfileExperienceAddModal
     },
     methods: {
-        async editExperience(experience, empExperienceId) {
+        async editExperience(experience, currentlyWorking, empExperienceId) {
+            if(currentlyWorking){
+                doconsole('null endyear')
+                experience.endYear = experience.startYear
+            }
             const response = await UserService.editEmployeeExperience(experience, this.$route.params.id, empExperienceId)
             if (response) {
                 this.$emit('update')

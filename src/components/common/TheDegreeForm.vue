@@ -2,7 +2,7 @@
 <div :class="styleAdmin? 'card' : ''">
     <div @click="checkNewDegree = false" :class="checkNewDegree ? 'newEducation':''">
         <div :class="styleAdmin? 'card-body' : ''">
-            <form @reset.prevent="checkNewDegree=true" @submit.prevent="$emit('return', newEducation, degreeIndex)">
+            <form @reset.prevent="checkNewDegree=true" @submit.prevent="onSubmit">
                 <legend v-if="degreeName">{{degreeName}}</legend>
                 <div class="row">
                     <div :class="styleAdmin ? 'col-md-3 col-sm-6' : 'col-md-6'">
@@ -44,11 +44,20 @@
                     </div>
                     <div :class="styleAdmin ? 'col-md-3 col-sm-6' : 'col-md-6'">
                         <div class="form-group">
+                            <label>Marking Criteria</label>
+                            <select v-model="markingCriteria" class="custom-select" required>
+                                <option selected value="0">Percentage</option>
+                                <option selected value="1">CGPA</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div :class="styleAdmin ? 'col-md-3 col-sm-6' : 'col-md-6'" v-if="markingCriteria == '1'">
+                        <div class="form-group">
                             <label>CGPA</label>
                             <input v-model="newEducation.cgpa" type="number" class="form-control" min="0" max="4" step="any" placeholder="Enter CGPA out of 4" required>
                         </div>
                     </div>
-                    <div :class="styleAdmin ? 'col-md-3 col-sm-6' : 'col-md-6'">
+                    <div :class="styleAdmin ? 'col-md-3 col-sm-6' : 'col-md-6'" v-if="markingCriteria == '0'">
                         <div class="form-group">
                             <label>Percentage</label>
                             <input v-model="newEducation.percentage" type="number" class="form-control" min="0" max="100" placeholder="Enter Percentage" required>
@@ -82,6 +91,7 @@ export default {
             selectDegreeTypes: null,
             styleAdmin: this.styleAs == 'admin' ? true : false,
             checkNewDegree: this.degreeIndex < 0,
+            markingCriteria: '0'
         }
     },
     methods: {
@@ -93,12 +103,19 @@ export default {
             const response = await UserService.getDegreeTypes(degreeLevelId)
             response ? this.selectDegreeTypes = response.data.data.degrees : ''
         },
+        onSubmit(){
+            this.markingCriteria == '0' ? this.newEducation.cgpa = '0' : this.newEducation.percentage = '0'
+            this.$emit('return', this.newEducation, this.degreeIndex)
+        }
     },
     mounted() {
+        if(this.newEducation.degreeLevelId){
+            this.newEducation.percentage == '0' ? this.markingCriteria = '1' : this.markingCriteria = '0' 
+        }
         this.getDegreeLevels();
-
         this.degreeId ? this.newEducation.degreeLevelId = this.degreeId : ''
         this.newEducation.degreeLevelId ? this.getDegreeTypes(this.newEducation.degreeLevelId) : ''
+
     },
 }
 </script>

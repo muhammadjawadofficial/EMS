@@ -20,9 +20,9 @@
                             <b-button class="float-right" v-if="canEdit" @click="deleteEducation(index)" variant="outline-danger"><i class="fas fa-trash-alt"></i></b-button>
                             <b-button class="float-right mr-1" v-if="canEdit" @click="editEducationIndex = index, $bvModal.show('edit-education')" variant="outline-primary"><i class="far fa-edit"></i></b-button>
                             <!-- <button class="btn" style="float:right" @click="editEducationIndex = index, activeModal = 'editEducation',previous = current, current = index" data-toggle="modal" data-target="#add-education"><i class="far fa-edit"></i></button> -->
-                            <h4 class="profile-heading-4"><b class="profile-text-weighted">{{education.degreeName}}</b></h4>
-                            <h5 class="profile-heading-5 font-lite-black"><b class="profile-text-weighted">{{education.empDegree.instituteName}} ({{education.degreeLevel.degreeLevel}} {{getYear(education.empDegree.endYear) - getYear(education.empDegree.startYear)}}years)</b></h5>
-                            <h6 class="profile-heading-6 font-lite-black margin-t-10">SESSION {{getYear(education.empDegree.startYear)}} - {{getYear(education.empDegree.endYear)}} with {{education.empDegree.percentage}}% Marks, CGPA: {{education.empDegree.cgpa}}</h6>
+                            <h4 class="profile-heading-4"><b class="profile-text-weighted">{{education.degreeName}}</b> - {{education.degreeLevel.degreeLevel}}</h4>
+                            <h5 class="profile-heading-5 font-lite-black"><b class="profile-text-weighted">{{education.empDegree.instituteName}}</b></h5>
+                            <h6 class="profile-heading-6 font-lite-black margin-t-10">SESSION {{education.empDegree.startYear | formatYear}} - {{education.empDegree.endYear | formatYear}} with {{education.empDegree.percentage != 0? education.empDegree.percentage + '% Marks' : 'CGPA: ' + education.empDegree.cgpa}}</h6>
                         </div><!-- education -->
                     </div><!-- education-wrapper -->
                     
@@ -57,9 +57,6 @@ export default {
         ProfileEducationManageModal
     },
     methods: {
-        getYear(date) {
-            return new Date(date).getFullYear()
-        },
         async deleteEducation(index) {
             await this.$bvModal.msgBoxConfirm('Please confirm that you want to delete this education', {
                     title: 'Are You Sure?',

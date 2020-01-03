@@ -1,55 +1,53 @@
 <template>
-<div>
-    <form @submit.prevent="updateEducation()">
-        <fieldset>
+<div class="card">
+    <div class="card-body">
+        <form @submit.prevent="updateEducation()">
             <legend>{{formLegend}}</legend>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <label>DegreeLevel</label>
-                            <div class="d-flex">
-                                <input type="text" class="form-control col-md-10" v-model="educationDetails.degreeLevel" required>
-                            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label>DegreeLevel</label>
+                        <div class="d-flex">
+                            <input type="text" class="form-control col-md-10" v-model="educationDetails.degreeLevel" required>
                         </div>
-                        <div class="form-group">
-                            <label>Degrees</label>
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6" v-for="(degree, index) in educationDetails.degrees" :key="index">
-                                    <div class="d-flex">
-                                        <input type="text" class="col-8 form-control mt-1" v-model="educationDetails.degrees[index].degreeName">
-                                        <div class="col-4 px-0 mt-2">
-                                            <a @click="deleteDegree(index)"><i class="fas fa-minus-circle custom-icon"></i></a>
-                                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Degrees</label>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6" v-for="(degree, index) in educationDetails.degrees" :key="index">
+                                <div class="d-flex">
+                                    <input type="text" class="col-8 form-control mt-1" v-model="educationDetails.degrees[index].degreeName">
+                                    <div class="col-4 px-0 mt-2">
+                                        <a @click="deleteDegree(index)"><i class="fas fa-minus-circle custom-icon"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
-                    <div class="col-md-4 add-degree-section">
-                        <div class="card">
-                            <div style="text-align: center;margin-top: 20px;">
-                                <a class="card-link" data-toggle="collapse" href="#card-element-747447">Add Degree</a>
-                                <hr>
-                            </div>
-                            <div id="card-element-747447" class="collapse">
-                                <div class="card-body">
-                                    <form @submit.prevent="addADegree()">
-                                        <label>Enter Degree</label>
-                                        <div class="d-flex flex-row">
-                                            <input type="text" placeholder="Degree Name" class="form-control col-10" v-model="newDegree" required>
-                                            <button class="" type="submit"><i class="far fa-save custom-icon"></i></button>
-                                        </div>
-                                    </form>
-                                </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+                <div class="col-md-4 add-degree-section">
+                    <div class="card">
+                        <div style="text-align: center;margin-top: 20px;">
+                            <a class="card-link" data-toggle="collapse" href="#card-element-747447">Add Degree</a>
+                            <hr>
+                        </div>
+                        <div id="card-element-747447" class="collapse">
+                            <div class="card-body">
+                                <form @submit.prevent="addADegree()">
+                                    <label>Enter Degree</label>
+                                    <div class="d-flex flex-row">
+                                        <input type="text" placeholder="Degree Name" class="form-control col-10" v-model="newDegree" required>
+                                        <button class="" type="submit"><i class="far fa-save custom-icon"></i></button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </fieldset>
-    </form>
+        </form>
+    </div>
 </div>
 </template>
 
@@ -109,8 +107,10 @@ export default {
         },
         async updateEducation() {
             if (this.isNewDegree) {
-                if(this.educationDetails.degrees.length < 1){
-                    this.$toasted.global.error({message: 'Please add atleast one degree against "' + this.educationDetails.degreeLevel + '"'})
+                if (this.educationDetails.degrees.length < 1) {
+                    this.$toasted.global.error({
+                        message: 'Please add atleast one degree against "' + this.educationDetails.degreeLevel + '"'
+                    })
                     return;
                 }
                 var newDegrees = {

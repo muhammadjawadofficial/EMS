@@ -5,18 +5,7 @@
     <div class="card">
         <div class="card-body">
             <b-row class="justify-content-end">
-                <!-- <b-col lg="8" v-if="showSearch">
-                    <b-form-group class="mb-0 text-center">
-                        <b-form-checkbox-group v-model="filterOn" class="row px-3">
-                            <b-form-checkbox class="col" value="id">ID</b-form-checkbox>
-                            <b-form-checkbox class="col" value="firstName">Name</b-form-checkbox>
-                            <b-form-checkbox class="col" value="designation">Designation</b-form-checkbox>
-                            <b-form-checkbox class="col" value="gender">Gender</b-form-checkbox>
-                            <b-form-checkbox class="col" value="contactNumber">Mobile</b-form-checkbox>
-                        </b-form-checkbox-group>
-                    </b-form-group>
-                </b-col> -->
-                <b-col lg="4" class="float-right p-0">
+                <b-col md="3" class="float-right p-0">
                     <b-input-group>
                         <b-input-group-append>
                             <!-- <i @click="showSearch = !showSearch" style="cursor:pointer"><i class="fas fa-filter ml-2"></i></a> -->
@@ -28,7 +17,7 @@
                 </b-col>
             </b-row>
 
-            <b-table sort-by="id" :filter="filter" :filterIncludedFields="filterOn" @filtered="onFiltered" :current-page="currentPage" :per-page="perPage" primary-key="id" sort-icon-left responsive striped hover :tbody-transition-props="tableTransition" :busy="busy" :items="usersList" :fields="tableFields">
+            <b-table sort-by="id" :filter="filter" @filtered="onFiltered" :current-page="currentPage" :per-page="perPage" primary-key="id" sort-icon-left responsive striped hover :tbody-transition-props="tableTransition" :busy="busy" :items="usersList" :fields="tableFields">
 
                 <template v-slot:cell(actions)="data">
                     <a @click="editUser(data.item.id)"><i class="far fa-edit"></i></a>
@@ -45,18 +34,18 @@
             </b-table>
             <b-row>
                 <b-col sm="5" md="2" class="my-auto">
-                    <b-form-select v-model="perPage" id="perPageSelect" size="sm" :options="pageOptions"></b-form-select>
+                    <b-form-select v-model="perPage" id="perPageSelect" size="sm" :options="pageOptions" @change="resetAndGetUsers"></b-form-select>
                 </b-col>
                 <b-col sm="7" md="4" class="my-auto">
-                    Showing {{perPage}} out of {{usersList.length}} records
+                    Showing {{perPage}} out of {{totalRows}} records
                 </b-col>
                 <b-col sm="12" md="6">
-                    <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage" align="fill" class="mt-1"></b-pagination>
+                    <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage" align="fill" class="mt-1" @input="pageChanged"></b-pagination>
                 </b-col>
             </b-row>
         </div>
     </div>
-    <AddEmployee @update="getUsers" />
+    <AddEmployee @update="pageChanged" />
 </div>
 </template>
 
@@ -73,7 +62,6 @@ export default {
     data() {
         return {
             filter: null,
-            filterOn: [],
             totalRows: 1,
             currentPage: 1,
             perPage: 9,
@@ -111,14 +99,28 @@ export default {
     beforeMount() {
         this.getUsers();
     },
+    watch: {
+        filter() {
+            if (!this.filter) {
+                this.resetAndGetUsers()
+            }
+        }
+    },
     methods: {
-        async getUsers() {
-            const response = await UserService.getUsersDetails()
-
+        resetAndGetUsers() {
+            this.usersList = []
+            this.getUsers()
+        },
+        pageChanged(x) {
+            if (this.usersList.length < this.totalRows)
+                this.getUsers()
+        },
+        async getUsers(action) {
+            this.busy = true
+            const response = await UserService.getUsersDetailsPaginated(this.currentPage - 1, this.perPage)
             if (response) {
                 this.busy = false
-                this.usersList = []
-                response.data.data.forEach(item => {
+                response.data.data.rows.forEach(item => {
                     this.usersList.push({
                         id: item.id,
                         name: item.firstName + ' ' + item.lastName,
@@ -127,7 +129,9 @@ export default {
                         contactNumber: item.contactNumber || 'N/A'
                     })
                 })
-                this.totalRows = this.usersList.length
+                if (this.totalRows <= 1){
+                    this.totalRows = response.data.data.count
+                }
             }
         },
         editUser(userId) {
@@ -167,6 +171,7 @@ export default {
         onFiltered(filteredItems) {
             // Trigger pagination to update the number of buttons/pages due to filtering
             this.totalRows = filteredItems.length
+            console.log(filteredItems)
             this.currentPage = 1
         }
     }
