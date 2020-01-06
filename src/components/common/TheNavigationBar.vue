@@ -6,8 +6,8 @@
         <button class="navbar-toggler sidebar-toggler" type="button" data-toggle="collapse" data-target="#navigationIndex" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon icon-bar"></span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-            <span class="navbar-toggler-icon icon-bar"></span>
+            <span v-if="$store.getters.USERROLE == 'true'" class="navbar-toggler-icon icon-bar"></span>
+            <span v-if="$store.getters.USERROLE == 'true'" class="navbar-toggler-icon icon-bar"></span>
         </button>
         <div class="logo" style="text-align:center">
             <img src="@/assets/db2.png" alt="DevBatch-logo">

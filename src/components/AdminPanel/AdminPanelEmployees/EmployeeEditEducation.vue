@@ -71,7 +71,7 @@ export default {
         },
         async deleteEducation(degreeIndex) {
 
-            const response = await UserService.deleteEducation(this.$route.params.id, this.degrees[degreeIndex].empDegree.id)
+            const response = await UserService.deleteEmployeeEducation(this.$route.params.id, this.degrees[degreeIndex].empDegree.id)
             if (response)
                 this.$emit('update', this.$route.params.id)
         }

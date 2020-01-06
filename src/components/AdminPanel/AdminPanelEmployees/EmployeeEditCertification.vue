@@ -33,7 +33,7 @@ export default {
                 this.$emit('update')
             }
         },
-        async deleteCertification(certificationIndex) {
+        async deleteEmployeeCertification(certificationIndex) {
 
             const response = await UserService.deleteCertification(this.$route.params.id, this.certificates[certificationIndex].empCertifications.id)
             if (response)

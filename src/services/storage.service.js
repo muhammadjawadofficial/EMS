@@ -8,51 +8,53 @@ const EMPLOYEE_EMAIL = "email"
  *
  * Current implementation stores to localStorage. Local Storage should always be
  * accessed through this instace.
-**/
+ **/
 const TokenService = {
-    getToken() {
-        return localStorage.getItem(TOKEN_KEY)
-    },
+  getToken() {
+    return localStorage.getItem(TOKEN_KEY)
+  },
 
-    saveToken(accessToken) {
-        localStorage.setItem(TOKEN_KEY, accessToken)
-    },
+  saveToken(accessToken) {
+    localStorage.setItem(TOKEN_KEY, accessToken)
+  },
+  
+  getCurrentEmployeeId() {
+    return localStorage.getItem(CURRENT_EMPLOYEE_ID)
+  },
 
-    clear() {
-        localStorage.clear()
-    },
-    
-    getCurrentEmployeeId() {
-        return localStorage.getItem(CURRENT_EMPLOYEE_ID)
-    },
+  saveCurrentEmployeeId(currentEmployeeId) {
+    localStorage.setItem(CURRENT_EMPLOYEE_ID, currentEmployeeId)
+  },
 
-    saveCurrentEmployeeId(currentEmployeeId) {
-        localStorage.setItem(CURRENT_EMPLOYEE_ID, currentEmployeeId)
-    },
-    
-    getIsAdmin() {
-        return localStorage.getItem(IS_ADMIN)
-    },
+  getIsAdmin() {
+    return localStorage.getItem(IS_ADMIN)
+  },
 
-    saveIsAdmin(isAdmin) {
-        localStorage.setItem(IS_ADMIN, isAdmin)
-    },
+  saveIsAdmin(isAdmin) {
+    localStorage.setItem(IS_ADMIN, isAdmin)
+  },
 
-    getEmployeeImage(){
-        return localStorage.getItem(EMPLOYEE_IMAGE)
-    },
+  getEmployeeImage() {
+    return localStorage.getItem(EMPLOYEE_IMAGE)
+  },
 
-    saveEmployeeImage(image){
-        localStorage.setItem(EMPLOYEE_IMAGE, image)
-    },
+  saveEmployeeImage(image) {
+    localStorage.setItem(EMPLOYEE_IMAGE, image)
+  },
 
-    getEmployeeEmail(){
-        return localStorage.getItem(EMPLOYEE_EMAIL)
-    },
+  getEmployeeEmail() {
+    return localStorage.getItem(EMPLOYEE_EMAIL)
+  },
 
-    saveEmployeeEmail(email){
-        localStorage.setItem(EMPLOYEE_EMAIL, email)
-    }
+  saveEmployeeEmail(email) {
+    localStorage.setItem(EMPLOYEE_EMAIL, email)
+  },
+
+  clear() {
+    localStorage.clear()
+  }
 }
 
-export { TokenService }
+export {
+  TokenService
+}

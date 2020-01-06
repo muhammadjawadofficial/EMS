@@ -100,7 +100,7 @@ export default {
             response ? this.selectDegreeLevels = response.data.data : ''
         },
         async getDegreeTypes(degreeLevelId) {
-            const response = await UserService.getDegreeTypes(degreeLevelId)
+            const response = await UserService.getDegreeDetails(degreeLevelId)
             response ? this.selectDegreeTypes = response.data.data.degrees : ''
         },
         onSubmit(){

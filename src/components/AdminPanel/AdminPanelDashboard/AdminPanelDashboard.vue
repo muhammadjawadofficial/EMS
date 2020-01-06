@@ -152,7 +152,7 @@ export default {
             }
         },
         async fillDesignationChartData() {
-            const response = await UserService.getSkillsDesignationData();
+            const response = await UserService.getDesignationChartData();
 
             var chartLabels = []
             var chartData = []

@@ -81,7 +81,6 @@ export default {
             }
         },
         addDegree(x) {
-
             this.educationDetails.degrees.push({
                 degreeName: x
             })
