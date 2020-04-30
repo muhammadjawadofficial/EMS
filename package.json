@@ -16,7 +16,7 @@
     "bootstrap-vue": "^2.1.0",
     "chart.js": "^2.9.3",
     "easy-circular-progress": "^1.0.4",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "moment": "^2.24.0",
     "vue": "^2.6.11",
     "vue-chartjs": "^3.5.0",
